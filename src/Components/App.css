@@ -7,7 +7,7 @@
 	color: rgb(60,60,60);
 }
 
-
+/* Main Nav menu styles */
 .menu > ul{
 	display: flex;
 	justify-content: center;
@@ -27,6 +27,7 @@
 	font-family: 'Cantarell', sans-serif;
 	font-size: 1.5em;
 }
-.menu > ul > li > a:hover {
-	cursor: pointer;
+
+.menu a.selected {
+	color: red;
 }
