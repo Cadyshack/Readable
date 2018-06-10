@@ -2,10 +2,11 @@
 
 import {
 	FETCH_CATEGORIES_REQUEST, FETCH_CATEGORIES_FAILURE, FETCH_CATEGORIES_SUCCESS
-} from '../actions';
+} from './types.js';
 
 
-const initialState = {
+/*
+	initialState = {
 	categories: {
 		isLoading: false,
 		hasErrored: false,
@@ -22,6 +23,7 @@ const initialState = {
 		sort: 'date',
 	}
 };
+*/
 
 const catInitState = {
 	isLoading: true,
@@ -32,7 +34,6 @@ function categories (state = catInitState, action) {
 	const { isLoading, hasErrored, catList } = action
 	switch (action.type) {
 		case FETCH_CATEGORIES_REQUEST :
-
 			return {
 				...state,
 				isLoading,
@@ -48,12 +49,11 @@ function categories (state = catInitState, action) {
 				...state,
 				catList
 			}
-
 			default :
 				return state
 	}
 }
 
 
-export default categories
+export default categories;
 

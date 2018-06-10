@@ -3,16 +3,18 @@ import React, { Component } from 'react';
 
 class PostList extends Component {
 
+	componentDidMount() {
+
+	}
 
 
 	render() {
-
-		let category = this.props.category;
+		//let match = this.props.match;
 
 		return (
 			<div>
 				<h1>This is PostList.js</h1>
-				<p>{category}</p>
+				<p>{this.props.match.url}</p>
 			</div>
 		);
 	}

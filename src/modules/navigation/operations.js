@@ -1,0 +1,26 @@
+import {categoryIsLoading, categoryHasErrored, categoryFetchSuccess } from './actions.js';
+import {api, headers } from '../../config.js';
+
+export const fetchCategories = () => dispatch => {
+	dispatch(categoryIsLoading(true));
+
+	fetch(`${api}/categories`, {headers})
+		.then( (response) => {
+			console.log("testing");
+			if (!response.ok){
+				throw Error(response.statusText);
+			}
+			dispatch(categoryIsLoading(false));
+			return response.json();
+		})
+		.then(
+			(categories) => dispatch(categoryFetchSuccess(categories)),
+			(error) => {
+				dispatch(categoryIsLoading(false));
+				dispatch(categoryHasErrored(true));
+				console.log('Testing some more');
+
+				}
+
+		);
+}
