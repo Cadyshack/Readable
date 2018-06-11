@@ -1,7 +1,9 @@
-//import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
 import {
-	FETCH_CATEGORIES_REQUEST, FETCH_CATEGORIES_FAILURE, FETCH_CATEGORIES_SUCCESS
+	FETCH_CATEGORIES_REQUEST,
+	FETCH_CATEGORIES_FAILURE,
+	FETCH_CATEGORIES_SUCCESS
 } from './types.js';
 
 
@@ -55,5 +57,5 @@ function categories (state = catInitState, action) {
 }
 
 
-export default categories;
+export default combineReducers({categories});
 

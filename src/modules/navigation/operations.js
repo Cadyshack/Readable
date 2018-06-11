@@ -18,8 +18,6 @@ export const fetchCategories = () => dispatch => {
 			(error) => {
 				dispatch(categoryIsLoading(false));
 				dispatch(categoryHasErrored(true));
-				console.log('Testing some more');
-
 				}
 
 		);
