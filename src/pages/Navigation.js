@@ -3,12 +3,23 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { navigationOperations } from '../modules/navigation';
 import Loading from 'react-loading';
+import Menu from 'react-icons/lib/md/menu';
+import './Navigation.css';
+
 
 
 class Navigation extends Component {
-
+	state = {
+		mobileNavOpen: false
+	}
 	componentDidMount() {
     this.props.fetchCat();
+  }
+  openNav = () => {
+  	this.setState({ mobileNavOpen: true });
+  }
+  closeNav = () => {
+  	this.setState({ mobileNavOpen: false });
   }
 
   render(){
@@ -28,11 +39,35 @@ class Navigation extends Component {
   			</header>
   		)
   	}
-
 		return (
 			<header className="app-header">
-				<h1 className="app-title">Readable</h1>
-		      <nav className="menu">
+				<div className="navbar-fixed">
+		      <nav className="menu blue-grey darken-4">
+		      	<div className="container nav-wrapper">
+		      		<span className="brand-logo">Readable</span>
+		      		<a className="sidenav-trigger" onClick={ this.openNav }><Menu size={30} /></a>
+		      		<ul className="nav-links hide-on-med-and-down">
+					      <li key="all">
+			      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
+			      		</li>
+			      		{
+			      			links.map( (cat) => (
+			      			<li key={cat.name}>
+			      				<NavLink activeClassName="selected" to={`/${cat.path}`}>{cat.name}</NavLink>
+		      				</li>
+			      			))
+			      		}
+			      	</ul>
+		      	</div>
+		      </nav>
+		      <div
+		      	onClick={ this.closeNav }
+		      	className={this.state.mobileNavOpen ?
+		      		'mobile-nav open blue-grey darken-4'
+		      		:
+		      		'mobile-nav close blue-grey darken-4'
+		      		} >
+		      		<span className="closebtn" >&times;</span>
 			      <ul>
 				      <li key="all">
 		      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
@@ -45,7 +80,8 @@ class Navigation extends Component {
 		      			))
 		      		}
 		      	</ul>
-		      </nav>
+	      	</div>
+		     </div>
 	     </header>
 			)
 		}

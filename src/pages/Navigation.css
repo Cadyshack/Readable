@@ -1,0 +1,94 @@
+.logo {
+	font-size: 2em;
+}
+nav.menu ul > li > a {
+	font-family: 'Cantarell', sans-serif;
+	font-size: 1.5em;
+	/*transition: none;*/
+}
+nav.menu ul.nav-links:hover {
+	cursor: pointer !important;
+}
+nav.menu ul > li > a:hover {
+	cursor: pointer;
+	background-color: #37474f;
+}
+.menu .nav-links a.selected {
+	background-color: #455a64;
+	border-bottom: solid 3px #263238;
+}
+
+.menu .nav-links li a:after {
+	display: block;
+	content: '';
+	position: relative;
+	bottom: 20px;
+	border-bottom: solid 3px #fff;
+	-webkit-transform: scaleX(0);
+	        transform: scaleX(0);
+	-webkit-transition: -webkit-transform 250ms ease-in-out;
+	transition: -webkit-transform 250ms ease-in-out;
+	transition: transform 250ms ease-in-out;
+	transition: transform 250ms ease-in-out, -webkit-transform 250ms ease-in-out;
+}
+.menu .nav-links li:hover a:after {
+	transform: scaleX(1);
+}
+.nav-links {
+	float: right;
+}
+
+.mobile-nav {
+	z-index: 1;
+	left: 0;
+	top: 0;
+	overflow-x: hidden;
+	transition: 0.5s;
+	height: 100%;
+	position: fixed;
+}
+
+.mobile-nav.close {
+	width: 0;
+	display: hidden;
+
+}
+.mobile-nav.open {
+	display: block;
+	width: 50%;
+}
+.mobile-nav ul {
+	position: relative;
+	top: 20%;
+	width: 100%;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.mobile-nav a {
+	display: block;
+	color: white;
+	padding: 1em;
+
+}
+.mobile-nav .closebtn {
+	position: absolute;
+	color: white;
+	font-size: 2em;
+	top: 20px;
+	right: 45px;
+	cursor: pointer;
+}
+
+@media only screen and (min-width: 992px) {
+	.mobile-nav {
+		display: none !important;
+	}
+}
+
+
+
+
+
+
+
