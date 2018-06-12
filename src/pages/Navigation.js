@@ -51,11 +51,11 @@ class Navigation extends Component {
 		}
 	}
 
-function mapStateToProps ({ isLoading, hasErrored, catList }) {
+function mapStateToProps ({ categories }) {
   return {
-    isLoading,
-    hasErrored,
-    catList
+    isLoading: categories.isLoading,
+    hasErrored: categories.hasErrored,
+    catList: categories.catList
   }
 }
 
