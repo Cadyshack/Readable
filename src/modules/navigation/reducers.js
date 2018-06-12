@@ -1,34 +1,11 @@
-import { combineReducers } from 'redux';
-
 import {
 	FETCH_CATEGORIES_REQUEST,
 	FETCH_CATEGORIES_FAILURE,
 	FETCH_CATEGORIES_SUCCESS
 } from './types.js';
 
-
-/*
-	initialState = {
-	categories: {
-		isLoading: false,
-		hasErrored: false,
-		catList: [],
-	},
-	posts: {
-		byId: {},
-		allIds: [],
-		sort: 'date',
-	},
-	comments: {
-		byId: {},
-		allIds: [],
-		sort: 'date',
-	}
-};
-*/
-
 const catInitState = {
-	isLoading: true,
+	isLoading: false,
 	hasErrored: false,
 	catList: []
 }
@@ -39,16 +16,19 @@ function categories (state = catInitState, action) {
 			return {
 				...state,
 				isLoading,
+				hasErrored: false,
 			}
 		case FETCH_CATEGORIES_FAILURE:
 			return {
 				...state,
-				hasErrored
+				hasErrored,
+				isLoading: false,
 			}
 
 		case FETCH_CATEGORIES_SUCCESS:
 			return {
-				...state,
+				isLoading: false,
+				hasErrored: false,
 				catList
 			}
 			default :
@@ -57,5 +37,5 @@ function categories (state = catInitState, action) {
 }
 
 
-export default combineReducers({categories});
+export default categories;
 

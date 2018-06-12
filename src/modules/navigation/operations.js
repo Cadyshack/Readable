@@ -6,11 +6,9 @@ export const fetchCategories = () => dispatch => {
 
 	fetch(`${api}/categories`, {headers})
 		.then( (response) => {
-			console.log("testing");
 			if (!response.ok){
 				throw Error(response.statusText);
 			}
-			dispatch(categoryIsLoading(false));
 			return response.json();
 		})
 		.then(
