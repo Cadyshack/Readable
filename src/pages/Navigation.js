@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink, withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { navigationOperations } from '../modules/navigation';
 import Loading from 'react-loading';
@@ -44,7 +44,7 @@ class Navigation extends Component {
 				<div className="navbar-fixed">
 		      <nav className="menu blue-grey darken-4">
 		      	<div className="container nav-wrapper">
-		      		<span className="brand-logo">Readable</span>
+		      		<Link to="/"><span className="brand-logo">Readable</span></Link>
 		      		<a className="sidenav-trigger" onClick={ this.openNav }><Menu size={30} /></a>
 		      		<ul className="nav-links hide-on-med-and-down">
 					      <li key="all">

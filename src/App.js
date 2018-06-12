@@ -10,6 +10,7 @@ import ErrorPage from './pages/ErrorPage.js';
 import './App.css';
 
 class App extends Component {
+
   render() {
     const links = this.props.catList;
     return (

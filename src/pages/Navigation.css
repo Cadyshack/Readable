@@ -1,5 +1,5 @@
-.logo {
-	font-size: 2em;
+.brand-logo {
+	cursor: pointer;
 }
 nav.menu ul > li > a {
 	font-family: 'Cantarell', sans-serif;
