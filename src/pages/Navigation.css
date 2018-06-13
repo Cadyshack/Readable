@@ -1,23 +1,68 @@
+header {
+	margin-bottom: 2em;
+}
+nav {
+	display: block;
+	color: white;
+	background-color: #263238;
+	height: 70px;
+}
+nav .container {
+	height: 100%;
+}
+nav a, .mobile-nav a {
+	text-decoration: none;
+	color: white;
+}
+nav ul, .mobile-nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+.menu .flex-nav{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+}
+
 .brand-logo {
 	cursor: pointer;
+	font-size: 2em;
 }
-nav.menu ul > li > a {
+
+.flex-nav .nav-links {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 0;
+}
+
+.menu ul > li > a {
 	font-family: 'Cantarell', sans-serif;
 	font-size: 1.5em;
-	/*transition: none;*/
+	padding: 0 1em;
+	display: block;
+	line-height: 70px;
 }
-nav.menu ul.nav-links:hover {
-	cursor: pointer !important;
-}
-nav.menu ul > li > a:hover {
+
+.menu ul.nav-links:hover {
 	cursor: pointer;
+}
+.menu ul > li:hover {
 	background-color: #37474f;
 }
+/*nav.menu ul > li > a:hover {
+	cursor: pointer;
+	background-color: #37474f;
+}*/
 .menu .nav-links a.selected {
 	background-color: #455a64;
 	border-bottom: solid 3px #263238;
+	transition: 0.5s;
 }
-
 .menu .nav-links li a:after {
 	display: block;
 	content: '';
@@ -34,10 +79,6 @@ nav.menu ul > li > a:hover {
 .menu .nav-links li:hover a:after {
 	transform: scaleX(1);
 }
-.nav-links {
-	float: right;
-}
-
 .mobile-nav {
 	z-index: 1;
 	left: 0;
@@ -46,8 +87,8 @@ nav.menu ul > li > a:hover {
 	transition: 0.5s;
 	height: 100%;
 	position: fixed;
+	background-color: #263238;
 }
-
 .mobile-nav.close {
 	width: 0;
 	display: hidden;
@@ -55,7 +96,7 @@ nav.menu ul > li > a:hover {
 }
 .mobile-nav.open {
 	display: block;
-	width: 50%;
+	width: 300px;
 }
 .mobile-nav ul {
 	position: relative;
@@ -64,12 +105,10 @@ nav.menu ul > li > a:hover {
 	text-align: center;
 	margin-top: 30px;
 }
-
 .mobile-nav a {
 	display: block;
 	color: white;
 	padding: 1em;
-
 }
 .mobile-nav .closebtn {
 	position: absolute;
@@ -79,13 +118,34 @@ nav.menu ul > li > a:hover {
 	right: 45px;
 	cursor: pointer;
 }
-
 @media only screen and (min-width: 992px) {
 	.mobile-nav {
 		display: none !important;
 	}
+	.sidenav-trigger {
+		display: none;
+	}
 }
+@media only screen and (max-width: 992px) {
+	.flex-nav .nav-links {
+		display: none;
+	}
+	.menu .flex-nav {
+		display: block;
+	}
+	span.sidenav-trigger {
+		float: left;
+		line-height: 70px;
+		display: block;
+	}
+	.logo-link{
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		line-height: 70px;
+	}
 
+}
 
 
 

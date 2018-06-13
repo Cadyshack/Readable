@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <div className="app">
         <Navigation />
-        <div className="post-list">
+        <div className="app-main">
           <Switch>
             <Route exact path="/" component={ PostList } />
             {

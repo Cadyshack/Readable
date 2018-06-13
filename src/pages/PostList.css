@@ -1,0 +1,13 @@
+.create {
+	padding-right: 10px;
+}
+.sort-container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+
+select {
+	display: block;
+}

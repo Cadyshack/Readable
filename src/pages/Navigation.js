@@ -41,31 +41,33 @@ class Navigation extends Component {
   	}
 		return (
 			<header className="app-header">
-				<div className="navbar-fixed">
-		      <nav className="menu blue-grey darken-4">
-		      	<div className="container nav-wrapper">
-		      		<Link to="/"><span className="brand-logo">Readable</span></Link>
-		      		<a className="sidenav-trigger" onClick={ this.openNav }><Menu size={30} /></a>
-		      		<ul className="nav-links hide-on-med-and-down">
-					      <li key="all">
-			      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
-			      		</li>
-			      		{
-			      			links.map( (cat) => (
-			      			<li key={cat.name}>
-			      				<NavLink activeClassName="selected" to={`/${cat.path}`}>{cat.name}</NavLink>
-		      				</li>
-			      			))
-			      		}
-			      	</ul>
-		      	</div>
+
+		      <nav className="menu">
+		      	<div className="container">
+	      			<div className="flex-nav">
+			      		<span className="sidenav-trigger" onClick={ this.openNav }><Menu size={30} /></span>
+			      		<Link to="/" className="logo-link"><span className="brand-logo">Readable</span></Link>
+			      		<ul className="nav-links">
+						      <li key="all">
+				      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
+				      		</li>
+				      		{
+				      			links.map( (cat) => (
+				      			<li key={cat.name}>
+				      				<NavLink activeClassName="selected" to={`/${cat.path}`}>{cat.name}</NavLink>
+			      				</li>
+				      			))
+				      		}
+				      	</ul>
+			      	</div>
+			      </div>
 		      </nav>
 		      <div
 		      	onClick={ this.closeNav }
 		      	className={this.state.mobileNavOpen ?
-		      		'mobile-nav open blue-grey darken-4'
+		      		'mobile-nav open'
 		      		:
-		      		'mobile-nav close blue-grey darken-4'
+		      		'mobile-nav close'
 		      		} >
 		      		<span className="closebtn" >&times;</span>
 			      <ul>
@@ -81,7 +83,7 @@ class Navigation extends Component {
 		      		}
 		      	</ul>
 	      	</div>
-		     </div>
+
 	     </header>
 			)
 		}
