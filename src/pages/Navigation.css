@@ -51,17 +51,17 @@ nav ul, .mobile-nav ul {
 .menu ul.nav-links:hover {
 	cursor: pointer;
 }
-.menu ul > li:hover {
+.menu ul > li:hover, .mobile-nav li:hover {
 	background-color: #37474f;
 }
-/*nav.menu ul > li > a:hover {
-	cursor: pointer;
-	background-color: #37474f;
-}*/
+
 .menu .nav-links a.selected {
 	background-color: #455a64;
 	border-bottom: solid 3px #263238;
 	transition: 0.5s;
+}
+.mobile-nav a.selected {
+	background-color: #455a64;
 }
 .menu .nav-links li a:after {
 	display: block;

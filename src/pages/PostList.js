@@ -45,7 +45,8 @@ class PostList extends Component {
 								<option value="score">score</option>
 							</select>
 						</label>
-					<button className="waves-effect btn"><Create size={30} className="create" />New Post</button>
+					<button className="ripple"><Create size={16} className="create" />New Post
+					</button>
 				</div>
 
 				<h1>This is PostList.js</h1>

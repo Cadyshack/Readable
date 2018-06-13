@@ -41,50 +41,44 @@ class Navigation extends Component {
   	}
 		return (
 			<header className="app-header">
-
-		      <nav className="menu">
-		      	<div className="container">
-	      			<div className="flex-nav">
-			      		<span className="sidenav-trigger" onClick={ this.openNav }><Menu size={30} /></span>
-			      		<Link to="/" className="logo-link"><span className="brand-logo">Readable</span></Link>
-			      		<ul className="nav-links">
-						      <li key="all">
-				      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
-				      		</li>
-				      		{
-				      			links.map( (cat) => (
-				      			<li key={cat.name}>
-				      				<NavLink activeClassName="selected" to={`/${cat.path}`}>{cat.name}</NavLink>
-			      				</li>
-				      			))
-				      		}
-				      	</ul>
-			      	</div>
-			      </div>
-		      </nav>
-		      <div
-		      	onClick={ this.closeNav }
-		      	className={this.state.mobileNavOpen ?
-		      		'mobile-nav open'
-		      		:
-		      		'mobile-nav close'
-		      		} >
-		      		<span className="closebtn" >&times;</span>
-			      <ul>
-				      <li key="all">
-		      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
-		      		</li>
-		      		{
-		      			links.map( (cat) => (
-		      			<li key={cat.name}>
-		      				<NavLink activeClassName="selected" to={`/${cat.path}`}>{cat.name}</NavLink>
-	      				</li>
-		      			))
-		      		}
-		      	</ul>
-	      	</div>
-
-	     </header>
+	      <nav className="menu">
+	      	<div className="container">
+      			<div className="flex-nav">
+		      		<span className="sidenav-trigger" onClick={ this.openNav }><Menu size={30} /></span>
+		      		<Link to="/" className="logo-link"><span className="brand-logo">Readable</span></Link>
+		      		<ul className="nav-links">
+					      <li key="all">
+			      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
+			      		</li>
+			      		{
+			      			links.map( (cat) => (
+			      			<li key={cat.name}>
+			      				<NavLink activeClassName="selected" to={`/${cat.path}`}>{cat.name}</NavLink>
+		      				</li>
+			      			))
+			      		}
+			      	</ul>
+		      	</div>
+		      </div>
+	      </nav>
+	      <div
+	      	onClick={ this.closeNav }
+	      	className={'mobile-nav ' + (this.state.mobileNavOpen ? 'open'	: 'close')} >
+	      		<span className="closebtn" >&times;</span>
+		      <ul>
+			      <li key="all">
+	      			<NavLink activeClassName="selected" exact to="/">All</NavLink>
+	      		</li>
+	      		{
+	      			links.map( (cat) => (
+	      			<li key={cat.name}>
+	      				<NavLink activeClassName="selected" to={`/${cat.path}`}>{cat.name}</NavLink>
+      				</li>
+	      			))
+	      		}
+	      	</ul>
+      	</div>
+	    </header>
 			)
 		}
 	}
