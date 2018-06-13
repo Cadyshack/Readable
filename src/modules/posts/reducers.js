@@ -2,7 +2,8 @@
 import {
 	FETCH_POSTS_REQUEST,
 	FETCH_POSTS_FAILURE,
-	FETCH_POSTS_SUCCESS
+	FETCH_POSTS_SUCCESS,
+	SORT_POSTS
 } from './types.js';
 
 const postInitState = {
@@ -14,7 +15,7 @@ const postInitState = {
 }
 
 export function posts (state = postInitState, action) {
-	const { isLoading, hasErrored, posts } = action;
+	const { isLoading, hasErrored, posts, sort } = action;
 	switch (action.type) {
 		case FETCH_POSTS_REQUEST:
 			return {
@@ -39,6 +40,12 @@ export function posts (state = postInitState, action) {
 				}, {}),
 				allIds: posts.map((post) => post.id)
 			}
+		case SORT_POSTS:
+			return {
+				...state,
+				sort
+			}
+
 			default :
 				return state
 	}

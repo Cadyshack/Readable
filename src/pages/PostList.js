@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postsOperations } from '../modules/posts';
+import { postsOperations, actions } from '../modules/posts';
+
 import Create from 'react-icons/lib/md/create';
 import './PostList.css';
 
@@ -14,11 +15,21 @@ import './PostList.css';
 
 class PostList extends Component {
 
+	state = {
+		sort: 'date'
+	}
+
 	componentDidMount() {
 		const {location} = this.props;
 		let category = location.pathname;
 		this.props.getPosts(category);
+	}
 
+	handleSort = (e) => {
+		let sort = e.target.value;
+		this.setState({ sort }, () => {
+			this.props.sortPost(sort)
+		});
 	}
 
 	render() {
@@ -28,8 +39,8 @@ class PostList extends Component {
 			<div className="container">
 				<div className="sort-container">
 						<label htmlFor="sort">
-						sort:
-							<select id="sort" name="sort">
+						sort by:
+							<select value={this.state.sort} onChange={ this.handleSort } id="sort" name="sort">
 								<option value="date">date</option>
 								<option value="score">score</option>
 							</select>
@@ -52,7 +63,8 @@ function mapStateToProps ({posts}) {
 
 function mapDispatchToProps (dispatch) {
 	return {
-		getPosts: (data) => dispatch(postsOperations.fetchPosts(data))
+		getPosts: (data) => dispatch(postsOperations.fetchPosts(data)),
+		sortPost: (sort) => dispatch(actions.sortPost(sort))
 	}
 }
 

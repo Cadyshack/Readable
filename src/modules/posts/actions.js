@@ -1,7 +1,8 @@
 import {
 	FETCH_POSTS_REQUEST,
 	FETCH_POSTS_FAILURE,
-	FETCH_POSTS_SUCCESS
+	FETCH_POSTS_SUCCESS,
+	SORT_POSTS
 } from './types.js';
 
 export const postIsLoading = (bool) => {
@@ -25,3 +26,9 @@ export const postFetchSuccess = (data) => {
 	}
 }
 
+export const sortPost = (sort) => {
+	return {
+		type: SORT_POSTS,
+		sort
+	}
+}
