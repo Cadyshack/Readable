@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import uuid from 'uuid/v4';
+
 import './NewPost.css';
 
 
@@ -16,148 +19,83 @@ new posts need to gather:
 }
  */
 
-
-class NewPost extends Component {
-	state = {
-		values: {
-			title: '',
-			body: '',
-			author: '',
-			category: 'select category'
-		},
-		errors: {
-			title: '',
-			body: '',
-			author: '',
-			category: 'select category'
-		},
-		isSubmitting: false,
-
-	}
-
-	handleChange = (e) => {
-		const target = e.target;
-		const name = target.name;
-		const value = target.value;
-		this.validateForm();
-		this.setState(
-			{
-				values: {
-					...this.state.values,
-					[name]: value
-				}
-			})
-	}
-
-	handleSubmit = (e) => {
-		e.preventDefault();
-		if (this.validateForm()){
-			this.setState({isSubmitting: true})
-			console.log('form passed validation');
-		} else {
-			console.log('form did not pass validation');
-		}
-
-	}
-
-	validateForm = () => {
-		let values = this.state.values;
-		let errors = {};
-		let formIsValid = true;
-		let namePattern = /^[A-Z]?[A-Za-z.'\- ]{1,50}$/;
-
-		if (values.title.trim() === ''){
-			formIsValid = false;
-			errors.title = "Please enter a Title";
-		}
-		if (values.body.trim() === ''){
-			formIsValid = false;
-			errors.body = "Please add content to the post before submitting";
-		}
-		if (values.author.trim() === ''){
-			formIsValid = false;
-			errors.author = "Name field cannot be empty!"
-		} else if (!namePattern.test(values.author)){
-			formIsValid = false;
-			errors.author = "Please enter a valid name with no numbers or symbols"
-		}
-		if (values.category === 'select category'){
-			formIsValid = false;
-			errors.category = 'Please choose a category'
-		}
-		this.setState({errors});
-		return formIsValid;
-	}
-
-	render() {
-		const onClose = this.props.onClose;
-		const errors = this.state.errors;
-		const isSubmitting = this.state.isSubmitting;
-		return (
-			<section className="new-post container">
-				<h2>Add New Post</h2>
-
-				<form className="post-form" onSubmit={this.handleSubmit}>
-
+const NewPost = ({onClose}) => {
+	return (
+		<section className="new-post container">
+			<h2>Add New Post</h2>
+			<Formik
+				initialValues={{
+					title: '',
+					body: '',
+					author: '',
+					category: 'select category'
+				}}
+				validationSchema={Yup.object().shape({
+					title: Yup.string().required('Please enter a title'),
+					body: Yup.string().required('Please add content to the post before submitting'),
+					author: Yup.string().required('Name field cannot be empty!').matches( /^[A-Z]?[A-Za-z.'\- ]{1,50}$/, "Please enter a valid name with no numbers or symbols" , {excludeEmptyString: true}),
+					category: Yup.mixed().notOneOf(['select category'], 'Please choose a category')
+				})}
+				onSubmit={(values, { setSubmitting, resetForm, setErrors }) => {
+					console.log(values);
+					setSubmitting(false);
+				}}
+				render={({ errors, touched, isSubmitting }) => (
+					<Form>
 						<p>
-							<input
-								type="text"
-								className={'title' + (errors.title ? ' error': '')}
-								name="title"
-								value={this.state.values.title}
+							<Field
+								type='text'
+								name='title'
+								className={`title ${errors.title && touched.title && 'error'}`}
 								placeholder="Enter Title"
-								onChange={this.handleChange}  />
-								{errors.title && <span className='errmsg'>{errors.title}</span>}
+							/>
+							{errors.title && touched.title && <span className='errmsg'>{errors.title}</span>}
 						</p>
 						<p>
-							<textarea
-								className={'body' + (errors.body ? ' error': '')}
-								name="body"
-								value={this.state.body}
-								onChange={this.handleChange}
-								rows="20"
-								placeholder="Enter post content here.." />
-							<span className='errmsg'>{errors.body}</span>
-						</p>
-
-					<div className="name-category">
-						<input
-							className={'author' + (errors.author ? ' error': '')}
-							type="text"
-							name="author"
-							value={this.state.values.author}
-							placeholder="Name (required)"
-							onChange={this.handleChange}
+							<Field
+								component='textarea'
+								name='body'
+								rows='20'
+								className={`body ${errors.body && touched.body && 'error'}`}
+								placeholder='Enter post content here..'
 							/>
-							<span className='errmsg'>{errors.author}</span>
-
-						<select
-							className={'category' + (errors.author ? ' error': '')}
-							name="category"
-							value={this.state.values.category}
-							onChange={ this.handleChange }
-							>
-							<option value="select category" disabled >select category</option>
-							<option value="react">react</option>
-							<option value="redux">redux</option>
-							<option value="udacity">udacity</option>
-						</select>
-						<span className='errmsg'>{errors.category}</span>
-
-					</div>
-
-					<div className="form-buttons">
-						<button type="button" className="ripple" onClick={onClose}>Cancel</button>
-						<button type="submint" className="ripple" disabled={isSubmitting} >Submit</button>
-					</div>
-
-				</form>
-			</section>
-
-
-		);
-	}
+							{errors.body && touched.body && <span className='errmsg'>{errors.body}</span>}
+						</p>
+						<div className="name-category">
+							<div>
+								<Field
+									type='text'
+									name='author'
+									className={`author ${errors.author && touched.author && 'error'}`}
+									placeholder='Name (required)'
+								/>
+								{errors.author && touched.author && <p className='errmsg'>{errors.author}</p>}
+							</div>
+							<div>
+								<Field
+									component='select'
+									name='category'
+									className={`category ${errors.category && touched.category && 'error'}`}
+									>
+									<option value="select category" disabled >select category</option>
+									<option value="react">react</option>
+									<option value="redux">redux</option>
+									<option value="udacity">udacity</option>
+								</Field>
+								{errors.category && touched.category && <p className='errmsg'>{errors.category}</p>}
+							</div>
+						</div>
+						<div className="form-buttons">
+							<button type="button" className="ripple" onClick={onClose}>Cancel</button>
+							<button type="submint" className="ripple" disabled={isSubmitting}>Submit</button>
+						</div>
+					</Form>
+				)}
+			/>
+		</section>
+	)
 }
+
 
 export default NewPost;
 
