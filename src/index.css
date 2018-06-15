@@ -1,3 +1,33 @@
+/*
+Color Pallette (taken from Materializecss.com ):
+Main Color used on Nav and throughout site blue-grey: #263238;
+#eceff1 blue-grey lighten-5
+#cfd8dc blue-grey lighten-4
+#b0bec5 blue-grey lighten-3
+#90a4ae blue-grey lighten-2
+#78909c blue-grey lighten-1
+#607d8b blue-grey
+#546e7a blue-grey darken-1
+#455a64 blue-grey darken-2
+#37474f blue-grey darken-3
+#263238 blue-grey darken-4
+
+
+
+Button Teal colors:
+#e0f2f1 teal lighten-5
+#b2dfdb teal lighten-4
+#80cbc4 teal lighten-3
+#4db6ac teal lighten-2
+#26a69a teal lighten-1
+#009688 teal
+#00897b teal darken-1
+#00796b teal darken-2
+#00695c teal darken-3
+#004d40 teal darken-4
+
+*/
+
 html{
   font-size: 16px;
 }
@@ -57,7 +87,6 @@ button {
   display: inline-block;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-  z-index: 1;
     -webkit-transition: .3s ease-out;
     transition: .3s ease-out;
 }
@@ -93,6 +122,189 @@ button:hover{
  opacity: .3;
  transition: 0s;
 }
+
+/* Modal styles */
+.overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.overlayOut {
+  background-color: transparent;
+  transition: background-color 500ms;
+}
+.modal {
+  position: absolute;
+  top: 40px;
+  left: 100px;
+  right: 100px;
+  bottom: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,.24), 0 3px 12px 0 rgba(0,0,0,.12);
+  min-width: 300px;
+  max-width: 1200px;
+  z-index: 100;
+  margin: 0 auto;
+  transition: 300ms;
+}
+
+@-webkit-keyframes zoomInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.1) translateY(-2000px);
+    transform: scale(.1) translateY(-2000px);
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale(.475) translateY(60px);
+    transform: scale(.475) translateY(60px);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes zoomInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.1) translateY(-2000px);
+    -ms-transform: scale(.1) translateY(-2000px);
+    transform: scale(.1) translateY(-2000px);
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale(.475) translateY(60px);
+    -ms-transform: scale(.475) translateY(60px);
+    transform: scale(.475) translateY(60px);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}
+
+.zoomInDown {
+  -webkit-animation-name: zoomInDown;
+  animation: zoomInDown 300ms linear;
+}
+
+@-webkit-keyframes zoomOut {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale(.3);
+    transform: scale(.3);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale(.3);
+    -ms-transform: scale(.3);
+    transform: scale(.3);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.zoomOut {
+  -webkit-animation-name: zoomOut;
+  animation: zoomOut 500ms ease-out;
+}
+@media only screen and (max-width: 600px) {
+  .modal {
+    left: 20px;
+    right: 20px;
+    min-width: none;
+  }
+}
+
+/*--- Form Fields ---*/
+input {
+  height: 30px;
+  font-size: 1em;
+  border-radius: 3px;
+  border: 1px solid rgb(200,200,200);
+}
+textarea {
+  border: 1px solid rgb(200,200,200);
+  border-radius: 3px;
+  font-size: 1em;
+}
+select {
+  border-radius: 0px;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

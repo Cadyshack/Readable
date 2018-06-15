@@ -63,7 +63,8 @@ class Navigation extends Component {
 	      </nav>
 	      <div
 	      	onClick={ this.closeNav }
-	      	className={'mobile-nav ' + (this.state.mobileNavOpen ? 'open'	: 'close')} >
+	      	className={'mobile-nav ' + (this.state.mobileNavOpen ? 'open'	: 'close')}
+	      	>
 	      		<span className="closebtn" >&times;</span>
 		      <ul>
 			      <li key="all">
@@ -78,6 +79,7 @@ class Navigation extends Component {
 	      		}
 	      	</ul>
       	</div>
+      	<div className='mobilenav-overlay'></div>
 	    </header>
 			)
 		}

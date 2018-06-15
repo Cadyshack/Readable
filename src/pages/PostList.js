@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postsOperations, actions } from '../modules/posts';
+import NewPost from './postList/NewPost.js';
+import Modal from 'react-modal';
 
 import Create from 'react-icons/lib/md/create';
 import './PostList.css';
@@ -16,7 +18,8 @@ import './PostList.css';
 class PostList extends Component {
 
 	state = {
-		sort: 'date'
+		sort: 'date',
+		postModalOpen: false
 	}
 
 	componentDidMount() {
@@ -31,9 +34,15 @@ class PostList extends Component {
 			this.props.sortPost(sort)
 		});
 	}
+	openPostModal = () => {
+		this.setState({postModalOpen: true})
+	}
+	closePostModal = () => {
+		this.setState({postModalOpen: false})
+	}
 
 	render() {
-		const { posts } = this.props;
+		const { postModalOpen } = this.state;
 
 		return (
 			<div className="container">
@@ -45,11 +54,35 @@ class PostList extends Component {
 								<option value="score">score</option>
 							</select>
 						</label>
-					<button className="ripple"><Create size={16} className="create" />New Post
+					<button
+						className="ripple"
+						onClick={this.openPostModal}
+						><Create size={16} className="create" />New Post
 					</button>
 				</div>
 
 				<h1>This is PostList.js</h1>
+				<Modal
+					className={{
+						base: 'modal',
+						afterOpen: 'zoomInDown',
+						beforeClose: 'zoomOut'
+					}}
+					isOpen={postModalOpen}
+					onRequestClose={this.closePostModal}
+					contentLabel='Add New Post Form'
+					overlayClassName={{
+						base: 'overlay',
+						afterOpen: '',
+						beforeClose: 'overlayOut'
+					}}
+					closeTimeoutMS={500}
+				>
+					<NewPost
+						onClose={ this.closePostModal }
+					 />
+				</Modal>
+
 			</div>
 		);
 	}
@@ -61,7 +94,6 @@ function mapStateToProps ({posts}) {
 		posts: posts
 	}
 }
-
 function mapDispatchToProps (dispatch) {
 	return {
 		getPosts: (data) => dispatch(postsOperations.fetchPosts(data)),

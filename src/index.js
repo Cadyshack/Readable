@@ -6,6 +6,9 @@ import registerServiceWorker from './utils/registerServiceWorker.js';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store.js';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 ReactDOM.render(
 	<BrowserRouter>
