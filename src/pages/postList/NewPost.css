@@ -1,0 +1,32 @@
+.new-post h2{
+	text-align: center;
+}
+.title, .body {
+	width: 100%;
+}
+.name-category {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.name-category .author {
+	min-width: 250px;
+	width: 50%;
+}
+.name-category .author, .name-category .category{
+	margin-bottom: 1em;
+}
+.form-buttons{
+	margin: 1em 0;
+	display: flex;
+	justify-content: flex-end;
+}
+.form-buttons > button:first-child {
+	margin-right: 1em;
+}
+input.error, textarea.error {
+	border: 1px solid red;
+}
+.errmsg {
+	color: red;
+}
