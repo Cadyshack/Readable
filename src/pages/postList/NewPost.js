@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import uuid from 'uuid/v4';
-
 import './NewPost.css';
 
 
@@ -15,11 +14,11 @@ new posts need to gather:
 	title: string,
 	body: string,
 	author: string,
-	category: catList
+	category: react
 }
  */
 
-const NewPost = ({onClose}) => {
+const NewPost = ({onClose, categories, addPost }) => {
 	return (
 		<section className="new-post container">
 			<h2>Add New Post</h2>
@@ -37,7 +36,17 @@ const NewPost = ({onClose}) => {
 					category: Yup.mixed().notOneOf(['select category'], 'Please choose a category')
 				})}
 				onSubmit={(values, { setSubmitting, resetForm, setErrors }) => {
-					console.log(values);
+					let id = uuid();
+					let timestamp = Date.now();
+					let post = {
+						...values,
+						id,
+						timestamp
+					}
+					let jsonPost = JSON.stringify(post)
+					addPost(jsonPost);
+
+					console.log(jsonPost);
 					setSubmitting(false);
 				}}
 				render={({ errors, touched, isSubmitting }) => (
@@ -78,16 +87,20 @@ const NewPost = ({onClose}) => {
 									className={`category ${errors.category && touched.category && 'error'}`}
 									>
 									<option value="select category" disabled >select category</option>
-									<option value="react">react</option>
-									<option value="redux">redux</option>
-									<option value="udacity">udacity</option>
+									{categories.map(cat => (
+										<option key={cat} value={cat}>{cat}</option>
+									))}
 								</Field>
 								{errors.category && touched.category && <p className='errmsg'>{errors.category}</p>}
 							</div>
 						</div>
 						<div className="form-buttons">
 							<button type="button" className="ripple" onClick={onClose}>Cancel</button>
-							<button type="submint" className="ripple" disabled={isSubmitting}>Submit</button>
+							<button
+							 type="submint"
+							 className="ripple"
+							 disabled={isSubmitting}
+							 >Submit</button>
 						</div>
 					</Form>
 				)}

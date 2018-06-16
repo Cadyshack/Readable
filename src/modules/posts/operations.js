@@ -1,7 +1,15 @@
-import {postIsLoading, postHasErrored, postFetchSuccess } from './actions.js';
+
+import {
+	postIsLoading,
+	postHasErrored,
+	postFetchSuccess,
+	addPostLoading,
+	addPostErrored,
+	addPostSuccess
+} from './actions.js';
 import {api, headers } from '../../config.js';
 
-export const fetchPosts = (category) => dispatch => {
+export const fetchPosts = (category) => (dispatch) => {
 	dispatch(postIsLoading(true));
 	let url = category === '/' ? `${api}/posts` : `${api}${category}/posts`;
 
@@ -20,4 +28,28 @@ export const fetchPosts = (category) => dispatch => {
 				dispatch(postHasErrored(true));
 				}
 		);
+}
+
+export const addPost = (post) => (dispatch) => {
+	dispatch(addPostLoading(true));
+	let url = api + '/posts';
+	fetch(url, {
+		method: 'post',
+		body: post,
+		headers: {...headers},
+	})
+	.then( (response) => {
+		if (!response.ok){
+			throw Error(response.statusText);
+		}
+		return response.json();
+	})
+	.then(
+		(post) => dispatch(addPostSuccess(post)),
+		(error) => {
+			dispatch(addPostLoading(false));
+			dispatch(addPostErrored(true));
+		}
+
+	)
 }

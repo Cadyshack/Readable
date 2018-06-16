@@ -80,6 +80,8 @@ class PostList extends Component {
 				>
 					<NewPost
 						onClose={ this.closePostModal }
+						categories={ this.props.categories }
+						addPost={ this.props.addPost }
 					 />
 				</Modal>
 
@@ -89,15 +91,17 @@ class PostList extends Component {
 }
 
 
-function mapStateToProps ({posts}) {
+function mapStateToProps ({posts, categories}) {
 	return {
-		posts: posts
+		posts: posts,
+		categories: categories.catList.map((cat) => cat.name)
 	}
 }
 function mapDispatchToProps (dispatch) {
 	return {
 		getPosts: (data) => dispatch(postsOperations.fetchPosts(data)),
-		sortPost: (sort) => dispatch(actions.sortPost(sort))
+		sortPost: (sort) => dispatch(actions.sortPost(sort)),
+		addPost: (post) => dispatch(postsOperations.addPost(post))
 	}
 }
 
