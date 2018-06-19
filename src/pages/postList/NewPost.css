@@ -4,6 +4,9 @@
 .title, .body {
 	width: 100%;
 }
+.body {
+	margin-top: 1em;
+}
 .name-category {
 	display: flex;
 	justify-content: space-between;
@@ -13,8 +16,19 @@
 	min-width: 250px;
 	width: 50%;
 }
+.name-category .author + p {
+	margin-bottom: 0px;
+}
 .name-category p {
 	margin-top: 0px;
+}
+.name-category > div {
+	margin-top: 1em;
+}
+.name-category div:last-child {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
 }
 .form-buttons{
 	margin: 1em 0;
@@ -29,4 +43,11 @@
 }
 .errmsg {
 	color: red;
+}
+.category {
+	border: 1px solid #37474f;
+	border-radius: 5px;
+	padding: 0 10px;
+	background-color: #546e7a;
+	color: #fff;
 }
