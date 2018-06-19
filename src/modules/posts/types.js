@@ -6,8 +6,9 @@ export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
-export const UP_VOTE = 'UP_VOTE';
-export const DOWN_VOTE = 'DOWN_VOTE';
 export const SORT_POSTS = 'SORT_POSTS';
+export const POST_VOTE_REQUEST = 'VOTE_REQUEST';
+export const POST_VOTE_FAILURE = 'VOTE_FAILURE';
+export const POST_VOTE_SUCCESS = 'VOTE_SUCCESS';
 
 

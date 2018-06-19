@@ -42,10 +42,8 @@ class PostList extends Component {
 
 	render() {
 		const { postModalOpen } = this.state;
-		const { byId, bySortedId } = this.props.posts;
+		const { byId, bySortedId, vote } = this.props.posts;
 		const { history } = this.props;
-
-
 
 		return (
 			<div className="container">
@@ -78,6 +76,8 @@ class PostList extends Component {
 									timestamp={byId[id].timestamp}
 									key={id}
 									history={history}
+									votePost={this.props.votePost}
+									vote={vote}
 								/>
 
 					))}
@@ -122,6 +122,7 @@ function mapStateToProps ({posts, categories}) {
 			byId: posts.byId,
 			sort: posts.sort,
 			bySortedId: selectors.getSortedPosts(posts),
+			vote: posts.vote,
 		},
 		categories: selectors.getCatName(categories)
 	}
@@ -130,7 +131,8 @@ function mapDispatchToProps (dispatch) {
 	return {
 		getPosts: (data) => dispatch(postsOperations.fetchPosts(data)),
 		sortPost: (sort) => dispatch(actions.sortPost(sort)),
-		addPost: (post) => dispatch(postsOperations.addPost(post))
+		addPost: (post) => dispatch(postsOperations.addPost(post)),
+		votePost: (id, vote) => dispatch(postsOperations.votePost(id, vote))
 	}
 }
 

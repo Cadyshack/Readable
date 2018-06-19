@@ -5,7 +5,10 @@ import {
 	SORT_POSTS,
 	ADD_POST_REQUEST,
 	ADD_POST_FAILURE,
-	ADD_POST_SUCCESS
+	ADD_POST_SUCCESS,
+	POST_VOTE_REQUEST,
+	POST_VOTE_FAILURE,
+	POST_VOTE_SUCCESS
 } from './types.js';
 
 export const postIsLoading = (bool) => {
@@ -53,3 +56,76 @@ export const addPostSuccess = (post) => {
 		post
 	}
 }
+export const voteRequest = (bool) => {
+	return {
+		type: POST_VOTE_REQUEST,
+		isLoading: bool,
+
+	}
+}
+export const voteFailure = (bool) => {
+	return {
+		type: POST_VOTE_FAILURE,
+		hasErrored: bool
+	}
+}
+export const voteSuccess = (post) => {
+	return {
+		type: POST_VOTE_SUCCESS,
+		post
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,3 @@
-
 import {
 	FETCH_POSTS_REQUEST,
 	FETCH_POSTS_FAILURE,
@@ -6,7 +5,10 @@ import {
 	SORT_POSTS,
 	ADD_POST_REQUEST,
 	ADD_POST_FAILURE,
-	ADD_POST_SUCCESS
+	ADD_POST_SUCCESS,
+	POST_VOTE_REQUEST,
+	POST_VOTE_FAILURE,
+	POST_VOTE_SUCCESS
 } from './types.js';
 
 const postInitState = {
@@ -14,11 +16,15 @@ const postInitState = {
 	hasErrored: false,
 	byId: {},
 	allIds: [],
-	sort: 'dateNew'
+	sort: 'dateNew',
+	vote: {
+		isLoading: false,
+		hasErrored: false
+	}
 }
 
 export function posts (state = postInitState, action) {
-	const { isLoading, hasErrored, posts, sort } = action;
+	const { isLoading, hasErrored, posts, post, sort } = action;
 	switch (action.type) {
 		case FETCH_POSTS_REQUEST:
 			return {
@@ -56,7 +62,7 @@ export function posts (state = postInitState, action) {
 				isLoading: false
 			}
 		case ADD_POST_SUCCESS:
-			const { post } = action;
+
 			return {
 				...state,
 				hasErrored: false,
@@ -74,6 +80,39 @@ export function posts (state = postInitState, action) {
 				...state,
 				sort
 			}
+		case POST_VOTE_REQUEST:
+			return {
+				...state,
+				vote: {
+					...state.vote,
+					isLoading,
+					hasErrored: false
+				}
+			}
+		case POST_VOTE_FAILURE:
+			return {
+				...state,
+				vote: {
+					...state.vote,
+					hasErrored,
+					isLoading: false
+				}
+			}
+		case POST_VOTE_SUCCESS:
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[post.id]: {
+						...post
+					}
+				},
+				vote: {
+					...state.vote,
+					hasErrored: false,
+					isLoading: false
+				}
+			}
 
 			default :
 				return state
@@ -82,4 +121,71 @@ export function posts (state = postInitState, action) {
 
 
 export default posts;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

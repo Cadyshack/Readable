@@ -1,11 +1,13 @@
-
 import {
 	postIsLoading,
 	postHasErrored,
 	postFetchSuccess,
 	addPostLoading,
 	addPostErrored,
-	addPostSuccess
+	addPostSuccess,
+	voteRequest,
+	voteFailure,
+	voteSuccess
 } from './actions.js';
 import {api, headers } from '../../config.js';
 
@@ -50,6 +52,80 @@ export const addPost = (post) => (dispatch) => {
 			dispatch(addPostLoading(false));
 			dispatch(addPostErrored(true));
 		}
-
 	)
 }
+
+
+export const votePost = (id, vote) => (dispatch) => {
+	let url = `${api}/posts/${id}`;
+
+	dispatch(voteRequest(true));
+	fetch(url, {
+		method: 'post',
+		body: JSON.stringify({option: vote}),
+		headers: {...headers},
+	})
+	.then((response) => {
+		if (!response.ok){
+			throw Error(response.statusText);
+		}
+		return response.json();
+	})
+	.then(
+		(post) => dispatch(voteSuccess(post)),
+		(error) => {
+			dispatch(voteRequest(false));
+			dispatch(voteFailure(true));
+		}
+	)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
