@@ -65,10 +65,19 @@
 	background-color: #546e7a;
 	color: #fff;
 }
+.category-tag:hover {
+	background-color: #78909c;
+	/*color: #37474f;*/
+}
 .category-tag:active {
 	background-color: transparent;
 	color: #37474f;
 }
+a.category-link {
+	text-decoration: none;
+}
+
+
 .comment {
 	color: #546e7a;
 }
@@ -80,6 +89,7 @@
 .edit-delete .buttons > button:first-child {
 	margin-right: 1em;
 }
+
 
 
 

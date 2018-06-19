@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ArrowUp from 'react-icons/lib/md/keyboard-arrow-up';
 import ArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
 import Comment from 'react-icons/lib/md/mode-comment';
@@ -10,23 +11,24 @@ const PostListItem = (props) => {
   const options = { year:'numeric', month:'long', day:'numeric', hour12: true, hour: '2-digit', minute: '2-digit' };
   let formattedDate = date.toLocaleDateString("en-CA", options);
 
-	const link = (e) => {
-		history.push(`/${category}/${id}`);
-	}
+	// const link = (e) => {
+	// 	history.push(`/${category}/${id}`);
+	// }
 
 	const testing = (e) => {
-  	e.stopPropagation();
-  	console.log('Propagation stopped');
+  	e.preventDefault();
+
   }
   const upVote = (e) => {
-  	e.stopPropagation();
+    e.preventDefault();
+
   }
   const downVote = (e) => {
-  	e.stopPropagation();
+  	e.preventDefault();
   }
 
   return (
-    <div className="post-list-item" onClick={link} >
+    <Link to={`/${category}/${id}`} className="post-list-item">
     	<div className="vote">
     		<ArrowUp size={30} className="upVote" onClick={upVote} />
     		<span>{voteScore}</span>
@@ -35,7 +37,9 @@ const PostListItem = (props) => {
     	<div className="info">
 	    	<h2>{title}</h2>
 	    	<div className="author-info">
-	    		<span className="category-tag">{category}</span>
+          <Link to={`/${category}`} className="category-link">
+	    		 <span className="category-tag">{category}</span>
+          </Link>
 	    		<span className="author">{`Posted by: ${author}`}</span>
 	    		<span className="date-info">{formattedDate}</span>
 
@@ -52,8 +56,9 @@ const PostListItem = (props) => {
 
 	    	</div>
     	</div>
+    </Link>
 
-    </div>
+
   )
 }
 
