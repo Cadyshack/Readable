@@ -14,7 +14,7 @@ const postInitState = {
 	hasErrored: false,
 	byId: {},
 	allIds: [],
-	sort: 'date'
+	sort: 'dateNew'
 }
 
 export function posts (state = postInitState, action) {

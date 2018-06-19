@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postsOperations, actions } from '../modules/posts';
+import { postsOperations, actions, selectors } from '../modules/posts';
 import NewPost from './postList/NewPost.js';
 import Modal from 'react-modal';
+import PostListItem from './postList/PostListItem.js';
+
 
 import Create from 'react-icons/lib/md/create';
 import './PostList.css';
@@ -18,7 +20,6 @@ import './PostList.css';
 class PostList extends Component {
 
 	state = {
-		sort: 'date',
 		postModalOpen: false
 	}
 
@@ -30,9 +31,7 @@ class PostList extends Component {
 
 	handleSort = (e) => {
 		let sort = e.target.value;
-		this.setState({ sort }, () => {
-			this.props.sortPost(sort)
-		});
+		this.props.sortPost(sort);
 	}
 	openPostModal = () => {
 		this.setState({postModalOpen: true})
@@ -43,15 +42,21 @@ class PostList extends Component {
 
 	render() {
 		const { postModalOpen } = this.state;
+		const { byId, bySortedId } = this.props.posts;
+		const { history } = this.props;
+
+
 
 		return (
 			<div className="container">
 				<div className="sort-container">
 						<label htmlFor="sort">
-						sort by:
-							<select value={this.state.sort} onChange={ this.handleSort } id="sort" name="sort">
-								<option value="date">date</option>
-								<option value="score">score</option>
+						sort by
+							<select value={this.props.posts.sort} onChange={ this.handleSort } id="sort" name="sort">
+								<option value="dateNew">New</option>
+								<option value="dateOld">Old</option>
+								<option value="highScore">Most Popular</option>
+								<option value="lowScore">Least Popular</option>
 							</select>
 						</label>
 					<button
@@ -60,8 +65,26 @@ class PostList extends Component {
 						><Create size={16} className="create" />New Post
 					</button>
 				</div>
+				<section className="post-list-container">
+					{bySortedId.map((id) => (
 
-				<h1>This is PostList.js</h1>
+							<PostListItem
+									title={byId[id].title}
+									author={byId[id].author}
+									category={byId[id].category}
+									id={id}
+									commentCount={byId[id].commentCount}
+									voteScore={byId[id].voteScore}
+									timestamp={byId[id].timestamp}
+									key={id}
+									history={history}
+								/>
+
+					))}
+
+				</section>
+
+
 				<Modal
 					className={{
 						base: 'modal',
@@ -90,11 +113,17 @@ class PostList extends Component {
 	}
 }
 
-
 function mapStateToProps ({posts, categories}) {
+
 	return {
-		posts: posts,
-		categories: categories.catList.map((cat) => cat.name)
+		posts: {
+			isLoading: posts.isLoading,
+			hasErrored: posts.hasErrored,
+			byId: posts.byId,
+			sort: posts.sort,
+			bySortedId: selectors.getSortedPosts(posts),
+		},
+		categories: selectors.getCatName(categories)
 	}
 }
 function mapDispatchToProps (dispatch) {
