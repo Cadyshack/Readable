@@ -12,11 +12,6 @@ import './PostList.css';
 
 //import PropTypes from 'prop-types';
 
-/*const date = new Date(1528737694553);
-		const options = { year:'numeric', month:'long', day:'numeric', hour12: true, hour: '2-digit', minute: '2-digit' };
-		const formattedDate = date.toLocaleDateString("en-CA", options);*/
-
-
 class PostList extends Component {
 
 	state = {
@@ -78,6 +73,7 @@ class PostList extends Component {
 									history={history}
 									votePost={this.props.votePost}
 									vote={vote}
+									deletePost={this.props.deletePost}
 								/>
 
 					))}
@@ -132,7 +128,8 @@ function mapDispatchToProps (dispatch) {
 		getPosts: (data) => dispatch(postsOperations.fetchPosts(data)),
 		sortPost: (sort) => dispatch(actions.sortPost(sort)),
 		addPost: (post) => dispatch(postsOperations.addPost(post)),
-		votePost: (id, vote) => dispatch(postsOperations.votePost(id, vote))
+		votePost: (id, vote) => dispatch(postsOperations.votePost(id, vote)),
+		deletePost: (id) => dispatch(postsOperations.deletePost(id))
 	}
 }
 

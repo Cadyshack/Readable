@@ -8,7 +8,10 @@ import {
 	ADD_POST_SUCCESS,
 	POST_VOTE_REQUEST,
 	POST_VOTE_FAILURE,
-	POST_VOTE_SUCCESS
+	POST_VOTE_SUCCESS,
+	DELETE_POST_REQUEST,
+	DELETE_POST_FAILURE,
+	DELETE_POST_SUCCESS
 } from './types.js';
 
 export const postIsLoading = (bool) => {
@@ -59,8 +62,7 @@ export const addPostSuccess = (post) => {
 export const voteRequest = (bool) => {
 	return {
 		type: POST_VOTE_REQUEST,
-		isLoading: bool,
-
+		isLoading: bool
 	}
 }
 export const voteFailure = (bool) => {
@@ -75,8 +77,24 @@ export const voteSuccess = (post) => {
 		post
 	}
 }
-
-
+export const deleteRequest = (bool) => {
+	return {
+		type: DELETE_POST_REQUEST,
+		isLoading: bool
+	}
+}
+export const deleteFailure = (bool) => {
+	return {
+		type: DELETE_POST_FAILURE,
+		hasErrored: bool
+	}
+}
+export const deleteSuccess = (post) => {
+	return {
+		type: DELETE_POST_SUCCESS,
+		post
+	}
+}
 
 
 

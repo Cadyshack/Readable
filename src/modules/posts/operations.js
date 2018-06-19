@@ -7,7 +7,10 @@ import {
 	addPostSuccess,
 	voteRequest,
 	voteFailure,
-	voteSuccess
+	voteSuccess,
+	deleteRequest,
+	deleteFailure,
+	deleteSuccess
 } from './actions.js';
 import {api, headers } from '../../config.js';
 
@@ -58,7 +61,6 @@ export const addPost = (post) => (dispatch) => {
 
 export const votePost = (id, vote) => (dispatch) => {
 	let url = `${api}/posts/${id}`;
-
 	dispatch(voteRequest(true));
 	fetch(url, {
 		method: 'post',
@@ -80,6 +82,28 @@ export const votePost = (id, vote) => (dispatch) => {
 	)
 }
 
+export const deletePost = (id) => (dispatch) => {
+	let url = `${api}/posts/${id}`;
+	dispatch(deleteRequest(true))
+	fetch(url, {
+		method: 'delete',
+		headers: {...headers}
+	})
+	.then((response) => {
+		if (!response.ok){
+			throw Error(response.statusText);
+		}
+		return response.json();
+	})
+	.then(
+		(post) => dispatch(deleteSuccess(post)),
+		(error) => {
+			dispatch(deleteRequest(false));
+			dispatch(deleteFailure(true));
+		}
+
+	)
+}
 
 
 

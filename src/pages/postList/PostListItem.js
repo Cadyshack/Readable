@@ -7,7 +7,7 @@ import Comment from 'react-icons/lib/md/mode-comment';
 import './PostListItem.css';
 
 const PostListItem = (props) => {
-  const { title, author, category, commentCount, voteScore, timestamp, id, history, votePost, vote } = props;
+  const { title, author, category, commentCount, voteScore, timestamp, id, history, votePost, vote, deletePost } = props;
   let date = new Date(timestamp);
   const options = { year:'numeric', month:'long', day:'numeric', hour12: true, hour: '2-digit', minute: '2-digit' };
   let formattedDate = date.toLocaleDateString("en-CA", options);
@@ -30,8 +30,10 @@ const PostListItem = (props) => {
   const editPost = (e) => {
     e.stopPropagation();
   }
-  const deletePost = (e) => {
+  const postDeletion = (e) => {
     e.stopPropagation();
+    deletePost(id);
+
   }
   return (
     <div className="post-list-item" onClick={link} >
@@ -58,7 +60,7 @@ const PostListItem = (props) => {
 	    		</div>
 	    		<div className="buttons">
 			    	<button className='ripple' onClick={editPost}>Edit</button>
-			    	<button className='ripple' onClick={deletePost}>Delete</button>
+			    	<button className='ripple' onClick={postDeletion}>Delete</button>
 		    	</div>
 	    	</div>
     	</div>

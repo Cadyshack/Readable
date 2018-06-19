@@ -8,14 +8,16 @@ import {
 	ADD_POST_SUCCESS,
 	POST_VOTE_REQUEST,
 	POST_VOTE_FAILURE,
-	POST_VOTE_SUCCESS
+	POST_VOTE_SUCCESS,
+	DELETE_POST_REQUEST,
+	DELETE_POST_FAILURE,
+	DELETE_POST_SUCCESS
 } from './types.js';
 
 const postInitState = {
 	isLoading: false,
 	hasErrored: false,
 	byId: {},
-	allIds: [],
 	sort: 'dateNew',
 	vote: {
 		isLoading: false,
@@ -27,12 +29,16 @@ export function posts (state = postInitState, action) {
 	const { isLoading, hasErrored, posts, post, sort } = action;
 	switch (action.type) {
 		case FETCH_POSTS_REQUEST:
+		case ADD_POST_REQUEST:
+		case DELETE_POST_REQUEST:
 			return {
 				...state,
 				isLoading,
 				hasErrored: false
 			}
 		case FETCH_POSTS_FAILURE:
+		case ADD_POST_FAILURE:
+		case DELETE_POST_FAILURE:
 			return {
 				...state,
 				hasErrored,
@@ -46,28 +52,13 @@ export function posts (state = postInitState, action) {
 				byId: posts.reduce((obj, post) => {
 					obj[post.id] = {...post}
 					return obj
-				}, {}),
-				allIds: posts.map((post) => post.id)
-			}
-		case ADD_POST_REQUEST:
-			return {
-				...state,
-				isLoading,
-				hasErrored: false
-			}
-		case ADD_POST_FAILURE:
-			return {
-				...state,
-				hasErrored,
-				isLoading: false
+				}, {})
 			}
 		case ADD_POST_SUCCESS:
-
 			return {
 				...state,
 				hasErrored: false,
 				isLoading: false,
-				allIds: [...state.allIds,	post.id ],
 				byId: {
 					...state.byId,
 					[post.id]: {
@@ -113,7 +104,17 @@ export function posts (state = postInitState, action) {
 					isLoading: false
 				}
 			}
-
+		case DELETE_POST_SUCCESS:
+			let byIdCopy = {...state.byId};
+			delete byIdCopy[post.id];
+			return {
+				...state,
+				hasErrored: false,
+				isLoading: false,
+				byId: {
+					...byIdCopy
+				}
+			}
 			default :
 				return state
 	}
