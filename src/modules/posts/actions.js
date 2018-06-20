@@ -11,7 +11,11 @@ import {
 	POST_VOTE_SUCCESS,
 	DELETE_POST_REQUEST,
 	DELETE_POST_FAILURE,
-	DELETE_POST_SUCCESS
+	DELETE_POST_SUCCESS,
+	EDIT_POST_REQUEST,
+	EDIT_POST_FAILURE,
+	EDIT_POST_SUCCESS,
+
 } from './types.js';
 
 export const postIsLoading = (bool) => {
@@ -77,32 +81,44 @@ export const voteSuccess = (post) => {
 		post
 	}
 }
-export const deleteRequest = (bool) => {
+
+export const deletePostRequest = (bool) => {
 	return {
 		type: DELETE_POST_REQUEST,
 		isLoading: bool
 	}
 }
-export const deleteFailure = (bool) => {
+export const deletePostFailure = (bool) => {
 	return {
 		type: DELETE_POST_FAILURE,
 		hasErrored: bool
 	}
 }
-export const deleteSuccess = (post) => {
+export const deletePostSuccess = (post ) => {
 	return {
 		type: DELETE_POST_SUCCESS,
 		post
 	}
 }
 
-
-
-
-
-
-
-
+export const editPostRequest = (bool) => {
+	return {
+		type: EDIT_POST_REQUEST,
+		isLoading: bool
+	}
+}
+export const editPostFailure = (bool) => {
+	return {
+		type: EDIT_POST_FAILURE,
+		hasErrored: bool
+	}
+}
+export const editPostSuccess = (post) => {
+	return {
+		type: EDIT_POST_SUCCESS,
+		post
+	}
+}
 
 
 

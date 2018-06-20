@@ -7,13 +7,17 @@ import Comment from 'react-icons/lib/md/mode-comment';
 import './PostListItem.css';
 
 const PostListItem = (props) => {
-  const { title, author, category, commentCount, voteScore, timestamp, id, history, votePost, vote, deletePost } = props;
+  const { title, body, author, category, commentCount, voteScore, timestamp, id, history, votePost, vote, deletePost, editPostModalOpen } = props;
   let date = new Date(timestamp);
-  const options = { year:'numeric', month:'long', day:'numeric', hour12: true, hour: '2-digit', minute: '2-digit' };
+  //const options = { year:'numeric', month:'long', day:'numeric', hour12: true, hour: '2-digit', minute: '2-digit' };
+  const options = { year:'numeric', month:'long', day:'numeric' };
   let formattedDate = date.toLocaleDateString("en-CA", options);
 
   const link = (e) => {
     history.push(`/${category}/${id}`);
+  }
+  const catLink = (e) => {
+    e.stopPropagation();
   }
 	const upVote = (e) => {
     e.stopPropagation();
@@ -27,8 +31,9 @@ const PostListItem = (props) => {
       votePost(id, 'downVote');
     }
   }
-  const editPost = (e) => {
+  const editPostButton = (e) => {
     e.stopPropagation();
+    editPostModalOpen(title, body, id);
   }
   const postDeletion = (e) => {
     e.stopPropagation();
@@ -45,7 +50,7 @@ const PostListItem = (props) => {
     	<div className="info">
 	    	<h2>{title}</h2>
 	    	<div className="author-info">
-          <Link to={`/${category}`} className="category-link">
+          <Link to={`/${category}`} className="category-link" onClick={catLink}>
             <span className="category-tag">{category}</span>
           </Link>
 
@@ -59,7 +64,7 @@ const PostListItem = (props) => {
 	    			<span><Comment size={30} className="comment" />{` ${commentCount} coments`}</span>
 	    		</div>
 	    		<div className="buttons">
-			    	<button className='ripple' onClick={editPost}>Edit</button>
+			    	<button className='ripple' onClick={editPostButton}>Edit</button>
 			    	<button className='ripple' onClick={postDeletion}>Delete</button>
 		    	</div>
 	    	</div>

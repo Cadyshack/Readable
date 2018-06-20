@@ -11,7 +11,10 @@ import {
 	POST_VOTE_SUCCESS,
 	DELETE_POST_REQUEST,
 	DELETE_POST_FAILURE,
-	DELETE_POST_SUCCESS
+	DELETE_POST_SUCCESS,
+	EDIT_POST_REQUEST,
+	EDIT_POST_FAILURE,
+	EDIT_POST_SUCCESS
 } from './types.js';
 
 const postInitState = {
@@ -21,16 +24,18 @@ const postInitState = {
 	sort: 'dateNew',
 	vote: {
 		isLoading: false,
-		hasErrored: false
+		hasErrored: false,
 	}
 }
 
-export function posts (state = postInitState, action) {
+function posts (state = postInitState, action) {
 	const { isLoading, hasErrored, posts, post, sort } = action;
+
 	switch (action.type) {
 		case FETCH_POSTS_REQUEST:
 		case ADD_POST_REQUEST:
 		case DELETE_POST_REQUEST:
+		case EDIT_POST_REQUEST:
 			return {
 				...state,
 				isLoading,
@@ -39,6 +44,7 @@ export function posts (state = postInitState, action) {
 		case FETCH_POSTS_FAILURE:
 		case ADD_POST_FAILURE:
 		case DELETE_POST_FAILURE:
+		case EDIT_POST_FAILURE:
 			return {
 				...state,
 				hasErrored,
@@ -66,6 +72,7 @@ export function posts (state = postInitState, action) {
 					}
 				}
 			}
+
 		case SORT_POSTS:
 			return {
 				...state,
@@ -89,6 +96,7 @@ export function posts (state = postInitState, action) {
 					isLoading: false
 				}
 			}
+
 		case POST_VOTE_SUCCESS:
 			return {
 				...state,
@@ -104,19 +112,33 @@ export function posts (state = postInitState, action) {
 					isLoading: false
 				}
 			}
+
+		case EDIT_POST_SUCCESS :
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[post.id]: {
+						...post
+					}
+				}
+			}
+
 		case DELETE_POST_SUCCESS:
-			let byIdCopy = {...state.byId};
+			let byIdCopy = Object.assign({}, state.byId);
 			delete byIdCopy[post.id];
 			return {
 				...state,
 				hasErrored: false,
 				isLoading: false,
 				byId: {
-					...byIdCopy
+					...byIdCopy,
 				}
 			}
-			default :
-				return state
+
+
+		default :
+			return state
 	}
 };
 

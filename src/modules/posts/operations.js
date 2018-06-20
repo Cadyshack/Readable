@@ -8,10 +8,14 @@ import {
 	voteRequest,
 	voteFailure,
 	voteSuccess,
-	deleteRequest,
-	deleteFailure,
-	deleteSuccess
+	deletePostRequest,
+	deletePostFailure,
+	deletePostSuccess,
+	editPostRequest,
+	editPostFailure,
+	editPostSuccess
 } from './actions.js';
+
 import {api, headers } from '../../config.js';
 
 export const fetchPosts = (category) => (dispatch) => {
@@ -84,9 +88,35 @@ export const votePost = (id, vote) => (dispatch) => {
 
 export const deletePost = (id) => (dispatch) => {
 	let url = `${api}/posts/${id}`;
-	dispatch(deleteRequest(true))
+	dispatch(deletePostRequest(true));
 	fetch(url, {
-		method: 'delete',
+		method: 'DELETE',
+		headers: {...headers},
+	})
+	.then((response) => {
+		if (!response.ok){
+			throw Error(response.statusText);
+		}
+		return response.json();
+	})
+	.then(
+		(post) => {
+			console.log('delete post success');
+			dispatch(deletePostSuccess(post))
+		},
+		(error) => {
+			dispatch(deletePostRequest(false));
+			dispatch(deletePostFailure(true));
+		}
+	)
+}
+
+export const editPost = (id, content) => (dispatch) => {
+	let editurl = `${api}/posts/${id}`;
+	dispatch(editPostRequest(true));
+	fetch(editurl, {
+		method: 'PUT',
+		body: content,
 		headers: {...headers}
 	})
 	.then((response) => {
@@ -96,16 +126,13 @@ export const deletePost = (id) => (dispatch) => {
 		return response.json();
 	})
 	.then(
-		(post) => dispatch(deleteSuccess(post)),
+		(post) => dispatch(editPostSuccess(post)),
 		(error) => {
-			dispatch(deleteRequest(false));
-			dispatch(deleteFailure(true));
+			dispatch(editPostRequest(false));
+			dispatch(editPostFailure(true));
 		}
-
 	)
 }
-
-
 
 
 

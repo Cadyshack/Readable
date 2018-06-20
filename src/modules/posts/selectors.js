@@ -15,7 +15,7 @@ export const getSortedPosts = createSelector(
 	postSort,
 	postById,
 	(sort, allPosts) => {
-		let postArray = Object.values(allPosts);
+		let postArray = Object.values(allPosts).concat();
 		let bySortId;
 		switch (sort) {
 			case 'dateNew':
