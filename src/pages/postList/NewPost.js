@@ -90,7 +90,7 @@ const NewPost = ({onClose, categories, addPost }) => {
 						<div className="form-buttons">
 							<button type="button" className="ripple" onClick={onClose}>Cancel</button>
 							<button
-							 type="submint"
+							 type="submit"
 							 className="ripple"
 							 disabled={isSubmitting}
 							 >Submit</button>
