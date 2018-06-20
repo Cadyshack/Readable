@@ -6,12 +6,11 @@ import NewPost from './postList/NewPost.js';
 import EditPost from './postList/EditPost.js';
 import Modal from 'react-modal';
 import PostListItem from './postList/PostListItem.js';
+import PropTypes from 'prop-types';
 
 
 import Create from 'react-icons/lib/md/create';
 import './PostList.css';
-
-//import PropTypes from 'prop-types';
 
 class PostList extends Component {
 	state = {
@@ -145,7 +144,6 @@ class PostList extends Component {
 }
 
 function mapStateToProps ({posts, categories}) {
-
 	return {
 		posts: {
 			isLoading: posts.isLoading,
@@ -158,6 +156,7 @@ function mapStateToProps ({posts, categories}) {
 		categories: selectors.getCatName(categories)
 	}
 }
+
 function mapDispatchToProps (dispatch) {
 	return {
 		getPosts: (data) => dispatch(postsOperations.fetchPosts(data)),
@@ -169,6 +168,60 @@ function mapDispatchToProps (dispatch) {
 	}
 }
 
+PostList.propTypes ={
+	getPosts: PropTypes.func.isRequired,
+	sortPost: PropTypes.func.isRequired,
+	addPost: PropTypes.func.isRequired,
+	votePost: PropTypes.func.isRequired,
+	deletePost: PropTypes.func.isRequired,
+	editPost: PropTypes.func.isRequired,
+	categories: PropTypes.array.isRequired,
+	posts: PropTypes.shape({
+		isLoading: PropTypes.bool.isRequired,
+		hasErrored: PropTypes.bool.isRequired,
+		byId: PropTypes.object.isRequired,
+		sort: PropTypes.string.isRequired,
+		bySortedId: PropTypes.array.isRequired,
+		vote: PropTypes.object.isRequired
+	})
+};
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostList))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
