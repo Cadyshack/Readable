@@ -53,11 +53,8 @@ const PostListItem = (props) => {
           <Link to={`/${category}`} className="category-link" onClick={catLink}>
             <span className="category-tag">{category}</span>
           </Link>
-
-
 	    		<span className="author">{`Posted by: ${author}`}</span>
 	    		<span className="date-info">{formattedDate}</span>
-
 	    	</div>
 	    	<div className="edit-delete">
 	    		<div>

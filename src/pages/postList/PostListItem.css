@@ -55,8 +55,11 @@
 	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 	margin-bottom: 1em;
+}
+.author-info > * {
+	margin-right: 1em;
 }
 .category-tag {
 	border: 1px solid #37474f;
