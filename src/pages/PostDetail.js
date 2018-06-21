@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { postsOperations } from '../modules/posts';
 import Loading from 'react-loading';
-import ErrorPage from './ErrorPage.js';
+import ErrorPage from '../components/ErrorPage.js';
 import Modal from 'react-modal';
 import EditPost from '../components/EditPost.js';
+import CommentList from './postDetail/CommentList.js';
 
 import './PostDetail.css';
 import ArrowUp from 'react-icons/lib/md/keyboard-arrow-up';
@@ -49,12 +50,6 @@ class PostDetail extends Component {
     }
   }
 
-  /*editPostButton = (e) => {
-  	const {title, body, id } = this.props.post;
-
-    editPostModalOpen(title, body, id);
-  }*/
-
   postDeletion = (e) => {
   	let id = this.props.id;
   	const deletePost = this.props.deletePost;
@@ -65,7 +60,6 @@ class PostDetail extends Component {
 	render() {
 		const { post, isLoading, hasErrored } = this.props;
 		const options = { year:'numeric', month:'long', day:'numeric' };
-
 
 		if (hasErrored || post == null){
   		return (
@@ -89,7 +83,6 @@ class PostDetail extends Component {
 			    		<span>{post.voteScore}</span>
 			    		<ArrowDown size={30} className="downVote" onClick={this.downVote} />
 			    	</div>
-
 			    	<div className="post-detail-info">
 			    		<div className="author">
 			    			<span >Posted by {post.author}</span><span className="date">
@@ -114,24 +107,26 @@ class PostDetail extends Component {
 			    	</div>
 		    	</div>
 
+		    	<CommentList />
+
 	    	</section>
 	    }
 	    <Modal
-					className={{
-						base: 'modal',
-						afterOpen: 'zoomInDown',
-						beforeClose: 'zoomOut'
-					}}
-					isOpen={this.state.editModalOpen}
-					onRequestClose={this.closeEditPostModal}
-					contentLabel='Edit Post Form'
-					overlayClassName={{
-						base: 'overlay',
-						afterOpen: '',
-						beforeClose: 'overlayOut'
-					}}
-					closeTimeoutMS={500}
-				>
+				className={{
+					base: 'modal',
+					afterOpen: 'zoomInDown',
+					beforeClose: 'zoomOut'
+				}}
+				isOpen={this.state.editModalOpen}
+				onRequestClose={this.closeEditModal}
+				contentLabel='Edit Post Form'
+				overlayClassName={{
+					base: 'overlay',
+					afterOpen: '',
+					beforeClose: 'overlayOut'
+				}}
+				closeTimeoutMS={500}
+			>
 					<EditPost
 						onClose={ this.closeEditModal }
 						editPost={ this.props.editPost }

@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Alert from 'react-s-alert';
-
-
-import Navigation from './pages/Navigation.js';
+import Navigation from './components/Navigation.js';
 import PostList from './pages/PostList.js';
 import PostDetail from './pages/PostDetail.js';
-import ErrorPage from './pages/ErrorPage.js';
+import ErrorPage from './components/ErrorPage.js';
 
 import './App.css';
 import 'react-s-alert/dist/s-alert-default.css';
