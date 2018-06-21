@@ -13,7 +13,10 @@ import {
 	deletePostSuccess,
 	editPostRequest,
 	editPostFailure,
-	editPostSuccess
+	editPostSuccess,
+	postDetailIsLoading,
+	postDetailHasErrored,
+	postDetailFetchSuccess
 } from './actions.js';
 
 import {api, headers } from '../../config.js';
@@ -35,6 +38,26 @@ export const fetchPosts = (category) => (dispatch) => {
 			(error) => {
 				dispatch(postIsLoading(false));
 				dispatch(postHasErrored(true));
+				}
+		);
+}
+
+export const fetchPostById = (id) => (dispatch) => {
+	dispatch(postDetailIsLoading(true));
+	let url = `${api}/posts/${id}`;
+	fetch(url, {headers})
+		.then( (response) => {
+
+			if (!response.ok){
+				throw Error(response.statusText);
+			}
+			return response.json();
+		})
+		.then(
+			(post) => dispatch(postDetailFetchSuccess(post)),
+			(error) => {
+				dispatch(postDetailIsLoading(false));
+				dispatch(postDetailHasErrored(true));
 				}
 		);
 }
@@ -101,7 +124,6 @@ export const deletePost = (id) => (dispatch) => {
 	})
 	.then(
 		(post) => {
-			console.log('delete post success');
 			dispatch(deletePostSuccess(post))
 		},
 		(error) => {
@@ -112,9 +134,9 @@ export const deletePost = (id) => (dispatch) => {
 }
 
 export const editPost = (id, content) => (dispatch) => {
-	let editurl = `${api}/posts/${id}`;
+	let url = `${api}/posts/${id}`;
 	dispatch(editPostRequest(true));
-	fetch(editurl, {
+	fetch(url, {
 		method: 'PUT',
 		body: content,
 		headers: {...headers}

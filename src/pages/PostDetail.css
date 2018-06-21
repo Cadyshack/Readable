@@ -1,0 +1,34 @@
+.post-detail-container {
+	position: relative;
+	padding: 10px 10px 10px 60px;
+}
+.post-detail-container .vote {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+
+}
+
+.post-detail-info > .author {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	color: #607d8b;
+}
+.author > span:first-child {
+	margin-right: 20px;
+}
+.post-detail-info h2{
+	margin-top: 0.5em;
+}
+.post-detail-body {
+	white-space: pre-line;
+	margin-bottom: 2em;
+}
+.edit-delete > div:first-child {
+	margin-bottom: 1em;
+}

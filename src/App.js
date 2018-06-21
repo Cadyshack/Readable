@@ -31,7 +31,11 @@ class App extends Component {
             }
             {
               links.map( (cat) => (
-                <Route exact key={cat.name+1} path={`/${cat.path}/:post_id`} component={ PostDetail } />
+                <Route exact key={cat.name+1} path={`/${cat.path}/:post_id`} render={({match}) => (
+                  <PostDetail
+                    id={match.params.post_id}
+                    />
+                )} />
               ))
             }
             <Route component={ ErrorPage } />

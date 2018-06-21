@@ -14,7 +14,10 @@ import {
 	DELETE_POST_SUCCESS,
 	EDIT_POST_REQUEST,
 	EDIT_POST_FAILURE,
-	EDIT_POST_SUCCESS
+	EDIT_POST_SUCCESS,
+	FETCH_POST_REQUEST,
+	FETCH_POST_FAILURE,
+	FETCH_POST_SUCCESS,
 } from './types.js';
 
 const postInitState = {
@@ -36,6 +39,7 @@ function posts (state = postInitState, action) {
 		case ADD_POST_REQUEST:
 		case DELETE_POST_REQUEST:
 		case EDIT_POST_REQUEST:
+		case FETCH_POST_REQUEST:
 			return {
 				...state,
 				isLoading,
@@ -45,6 +49,7 @@ function posts (state = postInitState, action) {
 		case ADD_POST_FAILURE:
 		case DELETE_POST_FAILURE:
 		case EDIT_POST_FAILURE:
+		case FETCH_POST_FAILURE:
 			return {
 				...state,
 				hasErrored,
@@ -59,6 +64,17 @@ function posts (state = postInitState, action) {
 					obj[post.id] = {...post}
 					return obj
 				}, {})
+			}
+		case FETCH_POST_SUCCESS:
+			return {
+				...state,
+				hasErrored: false,
+				isLoading: false,
+				byId: {
+					[post.id]: {
+						...post
+					}
+				}
 			}
 		case ADD_POST_SUCCESS:
 			return {
@@ -116,6 +132,8 @@ function posts (state = postInitState, action) {
 		case EDIT_POST_SUCCESS :
 			return {
 				...state,
+				isLoading: false,
+				hasErrored: false,
 				byId: {
 					...state.byId,
 					[post.id]: {

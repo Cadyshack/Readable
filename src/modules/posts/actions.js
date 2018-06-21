@@ -15,6 +15,9 @@ import {
 	EDIT_POST_REQUEST,
 	EDIT_POST_FAILURE,
 	EDIT_POST_SUCCESS,
+	FETCH_POST_REQUEST,
+	FETCH_POST_FAILURE,
+	FETCH_POST_SUCCESS,
 
 } from './types.js';
 
@@ -116,6 +119,27 @@ export const editPostFailure = (bool) => {
 export const editPostSuccess = (post) => {
 	return {
 		type: EDIT_POST_SUCCESS,
+		post
+	}
+}
+
+export const postDetailIsLoading = (bool) => {
+	return {
+		type: FETCH_POST_REQUEST,
+		isLoading: bool
+	}
+}
+
+export const postDetailHasErrored = (bool) => {
+	return {
+		type: FETCH_POST_FAILURE,
+		hasErrored: bool
+	}
+}
+
+export const postDetailFetchSuccess = (post) => {
+	return {
+		type: FETCH_POST_SUCCESS,
 		post
 	}
 }
