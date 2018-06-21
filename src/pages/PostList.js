@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postsOperations, actions, selectors } from '../modules/posts';
 import NewPost from './postList/NewPost.js';
-import EditPost from './postList/EditPost.js';
+import EditPost from '../components/EditPost.js';
 import Modal from 'react-modal';
 import PostListItem from './postList/PostListItem.js';
 import PropTypes from 'prop-types';

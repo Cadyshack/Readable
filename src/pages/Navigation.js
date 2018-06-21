@@ -35,7 +35,7 @@ class Navigation extends Component {
   	if ( isLoading ) {
   		return (
   			<header className="app-header">
-	  			<Loading type="spin" className="loader" />
+	  			<Loading type="spin" className="loader" color='#263238' />
   			</header>
   		)
   	}
