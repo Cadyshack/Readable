@@ -1,6 +1,9 @@
 .post-detail-container {
 	position: relative;
 	padding: 10px 10px 10px 60px;
+	max-width: 960px;
+	margin: 0 auto;
+	box-sizing: border-box;
 }
 .post-detail-container .vote {
 	display: flex;

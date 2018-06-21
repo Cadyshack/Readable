@@ -44,7 +44,7 @@ const PostListItem = (props) => {
     <div className="post-list-item" onClick={link} >
     	<div className="vote">
     		<ArrowUp size={30} className="upVote" onClick={upVote} />
-    		<span>{voteScore}</span>
+    		<span className="score">{voteScore}</span>
     		<ArrowDown size={30} className="downVote" onClick={downVote} />
     	</div>
     	<div className="info">

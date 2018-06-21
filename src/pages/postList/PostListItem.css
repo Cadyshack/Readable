@@ -23,6 +23,12 @@
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
+	padding: 0 5px;
+
+}
+.vote .score {
+	letter-spacing: 2px;
+	padding-left: 2px;
 }
 .upVote:hover {
 	color: #009688;
