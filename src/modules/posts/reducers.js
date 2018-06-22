@@ -20,6 +20,11 @@ import {
 	FETCH_POST_SUCCESS,
 } from './types.js';
 
+import {
+	ADD_COMMENT_SUCCESS,
+	DELETE_COMMENT_SUCCESS
+} from '../comments/types.js';
+
 const postInitState = {
 	isLoading: false,
 	hasErrored: false,
@@ -32,7 +37,7 @@ const postInitState = {
 }
 
 function posts (state = postInitState, action) {
-	const { isLoading, hasErrored, posts, post, sort } = action;
+	const { isLoading, hasErrored, posts, post, sort, comment } = action;
 
 	switch (action.type) {
 		case FETCH_POSTS_REQUEST:
@@ -151,6 +156,30 @@ function posts (state = postInitState, action) {
 				isLoading: false,
 				byId: {
 					...byIdCopy,
+				}
+			}
+		case DELETE_COMMENT_SUCCESS:
+
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[comment.parentId]: {
+						...state.byId[comment.parentId],
+						commentCount: state.byId[comment.parentId].commentCount - 1
+					}
+				}
+			}
+		case ADD_COMMENT_SUCCESS:
+
+			return {
+				...state,
+				byId: {
+					...state.byId,
+					[comment.parentId]: {
+						...state.byId[comment.parentId],
+						commentCount: state.byId[comment.parentId].commentCount + 1
+					}
 				}
 			}
 
