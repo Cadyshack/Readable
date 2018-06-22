@@ -120,7 +120,7 @@ function comments (state = commentsInitState, action ) {
 				isLoading: false,
 				byId: {
 					...byIdCopy,
-				}
+				},
 			}
 		default:
 			return state

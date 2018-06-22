@@ -107,7 +107,7 @@ export const deleteCommentFailure = (bool) => {
 		hasErrored: bool
 	}
 }
-export const deleteCommentSuccess = (comment) => {
+export const deleteCommentSuccess = ( comment ) => {
 	return {
 		type: DELETE_COMMENT_SUCCESS,
 		comment
