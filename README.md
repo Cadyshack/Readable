@@ -11,7 +11,7 @@ You'll need npm installed on your machine in order to install all the dependenci
 ## Installing
 Be aware that the server files are found inside the **api-server** folder, and all server dependecies must be installed seperately from the front-end dependencies.
 
-* Install and start the API server
+* Install and start the API server (from the root directory)
   * `cd api-server`
   * `npm install`
   * `node server`
@@ -33,6 +33,7 @@ In short, this app is broken down in the following manner:
   * App.js: registers the routes, and is the main root level component that renders all other app components.
   * config.js: sotres environment variables like api endpoints.
   * store.js: initializes the redux store.
+
 * Various Folders found under src folder:
   * components: this is where the shared components like _ErrorPage_ or _EditPost_ are found. Basically, any component that is used inside multiple components and need to be available globally are housed here.
   * modules: this is where all the Redux state (actions, reducers... using [re-ducks file structure](https://medium.freecodecamp.org/scaling-your-redux-app-with-ducks-6115955638be) are found)
