@@ -7,6 +7,8 @@ import EditPost from '../components/EditPost.js';
 import Modal from 'react-modal';
 import PostListItem from './postList/PostListItem.js';
 import PropTypes from 'prop-types';
+import Loading from 'react-loading';
+import ErrorPage from '../components/ErrorPage.js';
 
 
 import Create from 'react-icons/lib/md/create';
@@ -66,8 +68,25 @@ class PostList extends Component {
 	}
 	render() {
 		const { postModalOpen, editPostModal, editTitle, editBody, editPostId } = this.state;
-		const { byId, bySortedId, vote } = this.props.posts;
+		const { byId, bySortedId, vote, hasErrored, isLoading } = this.props.posts;
 		const { history } = this.props;
+
+		if (hasErrored ){
+  		return (
+  			<ErrorPage
+  				message="Can't seem to be able to retreave any posts at the moment."
+  			 />
+			)
+  	}
+  	if ( isLoading ) {
+  		return (
+  			<div className="isLoading">
+	  			<Loading type="spin" className="loader" color='#263238'  />
+  			</div>
+  		)
+  	}
+
+
 
 		return (
 			<div className="container">
