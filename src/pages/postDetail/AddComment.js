@@ -55,6 +55,7 @@ class AddComment extends Component {
 							timeout: 1500,
 						});
 						resetForm();
+						this.hideForm();
 					}}
 					onReset={(values, { setSubmitting, resetForm, setErrors }) =>{
 						resetForm();
