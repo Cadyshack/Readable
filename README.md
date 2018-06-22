@@ -28,16 +28,16 @@ For a detailed explenation of how I went about structuring the various files in 
 
 In short, this app is broken down in the following manner:
 * Root files:
-  * index.js: is the root level app component that renders the app
-  * index.css: houses most of the global styles used throughout the site, with component specific styles added next to said component and using same name as the component but ending with .css (i.e. MyComponent.js would have specific css stored in MyComponent.css)
-  * App.js: registers the routes, and is the main root level component that renders all other app components.
-  * config.js: sotres environment variables like api endpoints.
-  * store.js: initializes the redux store.
+  * **index.js**: is the root level app component that renders the app
+  * **index.css**: houses most of the global styles used throughout the site, with component specific styles added next to said component and using same name as the component but ending with .css (i.e. MyComponent.js would have specific css stored in MyComponent.css)
+  * **App.js**: registers the routes, and is the main root level component that renders all other app components.
+  * **config.js**: sotres environment variables like api endpoints.
+  * **store.js**: initializes the redux store.
 
 * Various Folders found under src folder:
-  * components: this is where the shared components like _ErrorPage_ or _EditPost_ are found. Basically, any component that is used inside multiple components and need to be available globally are housed here.
-  * modules: this is where all the Redux state (actions, reducers... using [re-ducks file structure](https://medium.freecodecamp.org/scaling-your-redux-app-with-ducks-6115955638be) are found)
-  * pages: here are the root level components, ones which are directly mounted on level 1 routes.
+  * **components**: this is where the shared components like _ErrorPage_ or _EditPost_ are found. Basically, any component that is used inside multiple components and need to be available globally are housed here.
+  * **modules**: this is where all the Redux state (actions, reducers... using [re-ducks file structure](https://medium.freecodecamp.org/scaling-your-redux-app-with-ducks-6115955638be) are found)
+  * **pages**: here are the root level components, ones which are directly mounted on level 1 routes.
     * Inside this folder you will find sub-folders, where each sub-folder corresponds to a root level folder of the same name, and houses all child components of this parent Component. The logic comes from the [fractal structure](https://hackernoon.com/fractal-a-react-app-structure-for-infinite-scale-4dab943092af) where any Root component with child components houses these child components in a folder with same name as parent component but using lowerCamelCase for the folder and regular CamelCase for the Components
     * ex: _MyComponent_ with a _MyChildComponent_ would then create a folder named **myComponent** where you would find _MyChildComponent.js_ and possibly _MyChildComponent.css_ and any other child components. If _MyChildComponent_ also had a _ContactForm_ component as it's child, then inside **myComponent** folder you would create another folder named **contactForm**, and place the _ContactForm.js_ component here.
 
