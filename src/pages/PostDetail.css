@@ -13,9 +13,13 @@
 	position: absolute;
 	left: 0px;
 	top: 0px;
-
+	width: 60px;
 }
-
+.post-detail-container article {
+	border: 1px solid #37474f;
+	border-radius: 5px;
+	padding: 2em;
+}
 .post-detail-info > .author {
 	display: flex;
 	flex-flow: row wrap;
@@ -32,6 +36,12 @@
 	white-space: pre-line;
 	margin-bottom: 2em;
 }
-.edit-delete > div:first-child {
-	margin-bottom: 1em;
+
+
+
+@media only screen and (max-width: 450px) {
+	.edit-delete > div:first-child {
+		margin-bottom: 1em;
+	}
 }
+

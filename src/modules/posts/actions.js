@@ -18,7 +18,6 @@ import {
 	FETCH_POST_REQUEST,
 	FETCH_POST_FAILURE,
 	FETCH_POST_SUCCESS,
-
 } from './types.js';
 
 export const postIsLoading = (bool) => {

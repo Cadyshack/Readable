@@ -3,12 +3,14 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { postsOperations } from '../modules/posts';
+import { commentOperations } from '../modules/comments';
 import Loading from 'react-loading';
 import ErrorPage from '../components/ErrorPage.js';
 import Modal from 'react-modal';
 import EditPost from '../components/EditPost.js';
 import CommentList from './postDetail/CommentList.js';
 import DateComponent from '../components/DateComponent.js';
+import AddComment from './postDetail/AddComment.js';
 
 import './PostDetail.css';
 import ArrowUp from 'react-icons/lib/md/keyboard-arrow-up';
@@ -84,34 +86,40 @@ class PostDetail extends Component {
 	    <div className="container">
 	    {post !== null &&
 	    	<section className='post-detail-container'>
-	    		<div className="post-detail-header">
-	    			<div className="vote">
-			    		<ArrowUp size={30} className="upVote" onClick={this.upVote}  />
-			    		<span>{post.voteScore}</span>
-			    		<ArrowDown size={30} className="downVote" onClick={this.downVote} />
-			    	</div>
-			    	<div className="post-detail-info">
-			    		<div className="author">
-			    			<span >Posted by {post.author}</span><span className="date">
-			    			<DateComponent timestamp={post.timestamp} />
+	    		<article>
+		    		<div className="post-detail-header">
+		    			<div className="vote">
+				    		<ArrowUp size={30} className="upVote" onClick={this.upVote}  />
+				    		<span>{post.voteScore}</span>
+				    		<ArrowDown size={30} className="downVote" onClick={this.downVote} />
+				    	</div>
+				    	<div className="post-detail-info">
+				    		<div className="author">
+				    			<span >Posted by {post.author}</span><span className="date">
+				    			<DateComponent timestamp={post.timestamp} />
 
-			    			</span>
-			    		</div>
-			    		<h2>{post.title}</h2>
-			    	</div>
-	    		</div>
-	    		<div className="post-detail-body">
-		    		{post.body}
-		    	</div>
-		    	<div className="edit-delete">
-		    		<div>
-		    			<span><Comment size={30} className="comment" />{` ${post.commentCount} coments`}</span>
+				    			</span>
+				    		</div>
+				    		<h2>{post.title}</h2>
+				    	</div>
 		    		</div>
-		    		<div className="buttons">
-				    	<button className='ripple' onClick={this.openEditModal} >Edit</button>
-				    	<button className='ripple' onClick={this.postDeletion} >Delete</button>
+		    		<div className="post-detail-body">
+			    		{post.body}
 			    	</div>
-		    	</div>
+			    	<div className="edit-delete">
+			    		<div>
+			    			<span><Comment size={30} className="comment" />{` ${post.commentCount} coments`}</span>
+			    		</div>
+			    		<div className="buttons">
+					    	<button className='ripple' onClick={this.openEditModal} >Edit</button>
+					    	<button className='ripple' onClick={this.postDeletion} >Delete</button>
+				    	</div>
+			    	</div>
+			    </article>
+		    	<AddComment
+		    		parentId={id}
+		    		addComment={this.props.addComment}
+		    	/>
 
 		    	<CommentList
 		    		postId={id}
@@ -165,6 +173,7 @@ function mapDistpatchToProps (dispatch) {
 		votePost: (id, vote) => dispatch(postsOperations.votePost(id, vote)),
 		deletePost: (id) => dispatch(postsOperations.deletePost(id)),
 		editPost: (id,content) => dispatch(postsOperations.editPost(id,content)),
+		addComment: (comment) => dispatch(commentOperations.addComment(comment))
 	}
 }
 
