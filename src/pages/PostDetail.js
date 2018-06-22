@@ -8,6 +8,7 @@ import ErrorPage from '../components/ErrorPage.js';
 import Modal from 'react-modal';
 import EditPost from '../components/EditPost.js';
 import CommentList from './postDetail/CommentList.js';
+import DateComponent from '../components/DateComponent.js';
 
 import './PostDetail.css';
 import ArrowUp from 'react-icons/lib/md/keyboard-arrow-up';
@@ -17,9 +18,15 @@ import Comment from 'react-icons/lib/md/mode-comment';
 
 
 class PostDetail extends Component {
+
+	static propTypes = {
+		id: PropTypes.string.isRequired,
+		isLoading: PropTypes.bool.isRequired,
+		hasErrored: PropTypes.bool.isRequired,
+	}
+
 	state = {
 		editModalOpen: false,
-
 	}
 
 	componentDidMount() {
@@ -58,8 +65,8 @@ class PostDetail extends Component {
   }
 
 	render() {
-		const { post, isLoading, hasErrored } = this.props;
-		const options = { year:'numeric', month:'long', day:'numeric' };
+		const { post, isLoading, hasErrored,id } = this.props;
+
 
 		if (hasErrored || post == null){
   		return (
@@ -86,9 +93,8 @@ class PostDetail extends Component {
 			    	<div className="post-detail-info">
 			    		<div className="author">
 			    			<span >Posted by {post.author}</span><span className="date">
-			    			{
-			    				new Date(post.timestamp).toLocaleDateString("en-CA", options)
-			    			}
+			    			<DateComponent timestamp={post.timestamp} />
+
 			    			</span>
 			    		</div>
 			    		<h2>{post.title}</h2>
@@ -107,7 +113,9 @@ class PostDetail extends Component {
 			    	</div>
 		    	</div>
 
-		    	<CommentList />
+		    	<CommentList
+		    		postId={id}
+		    	 />
 
 	    	</section>
 	    }
@@ -160,11 +168,6 @@ function mapDistpatchToProps (dispatch) {
 	}
 }
 
-PostDetail.propTypes = {
-	id: PropTypes.string.isRequired,
-	isLoading: PropTypes.bool.isRequired,
-	hasErrored: PropTypes.bool.isRequired,
-}
 
 
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import DateComponent from '../../components/DateComponent.js';
 
 import ArrowUp from 'react-icons/lib/md/keyboard-arrow-up';
 import ArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
@@ -8,10 +10,7 @@ import './PostListItem.css';
 
 const PostListItem = (props) => {
   const { title, body, author, category, commentCount, voteScore, timestamp, id, history, votePost, vote, deletePost, editPostModalOpen } = props;
-  let date = new Date(timestamp);
-  //const options = { year:'numeric', month:'long', day:'numeric', hour12: true, hour: '2-digit', minute: '2-digit' };
-  const options = { year:'numeric', month:'long', day:'numeric' };
-  let formattedDate = date.toLocaleDateString("en-CA", options);
+
 
   const link = (e) => {
     history.push(`/${category}/${id}`);
@@ -54,7 +53,7 @@ const PostListItem = (props) => {
             <span className="category-tag">{category}</span>
           </Link>
 	    		<span className="author">{`Posted by: ${author}`}</span>
-	    		<span className="date-info">{formattedDate}</span>
+	    		<DateComponent timestamp={timestamp} />
 	    	</div>
 	    	<div className="edit-delete">
 	    		<div>
@@ -72,4 +71,62 @@ const PostListItem = (props) => {
   )
 }
 
+PostListItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  commentCount: PropTypes.number.isRequired,
+  voteScore: PropTypes.number.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  votePost: PropTypes.func.isRequired,
+  vote: PropTypes.object.isRequired,
+  deletePost: PropTypes.func.isRequired,
+  editPostModalOpen: PropTypes.func.isRequired,
+}
+
 export default PostListItem;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

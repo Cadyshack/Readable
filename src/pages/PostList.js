@@ -13,6 +13,24 @@ import Create from 'react-icons/lib/md/create';
 import './PostList.css';
 
 class PostList extends Component {
+	static propTypes = {
+		getPosts: PropTypes.func.isRequired,
+		sortPost: PropTypes.func.isRequired,
+		addPost: PropTypes.func.isRequired,
+		votePost: PropTypes.func.isRequired,
+		deletePost: PropTypes.func.isRequired,
+		editPost: PropTypes.func.isRequired,
+		categories: PropTypes.array.isRequired,
+		posts: PropTypes.shape({
+			isLoading: PropTypes.bool.isRequired,
+			hasErrored: PropTypes.bool.isRequired,
+			byId: PropTypes.object.isRequired,
+			sort: PropTypes.string.isRequired,
+			bySortedId: PropTypes.array.isRequired,
+			vote: PropTypes.object.isRequired
+		})
+	}
+
 	state = {
 		postModalOpen: false,
 		editPostModal: false,
@@ -168,23 +186,6 @@ function mapDispatchToProps (dispatch) {
 	}
 }
 
-PostList.propTypes ={
-	getPosts: PropTypes.func.isRequired,
-	sortPost: PropTypes.func.isRequired,
-	addPost: PropTypes.func.isRequired,
-	votePost: PropTypes.func.isRequired,
-	deletePost: PropTypes.func.isRequired,
-	editPost: PropTypes.func.isRequired,
-	categories: PropTypes.array.isRequired,
-	posts: PropTypes.shape({
-		isLoading: PropTypes.bool.isRequired,
-		hasErrored: PropTypes.bool.isRequired,
-		byId: PropTypes.object.isRequired,
-		sort: PropTypes.string.isRequired,
-		bySortedId: PropTypes.array.isRequired,
-		vote: PropTypes.object.isRequired
-	})
-};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostList))
 
