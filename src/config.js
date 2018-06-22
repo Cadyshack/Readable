@@ -8,6 +8,6 @@ if (!token){
 
 export const headers = {
   'Accept': 'application/json',
-  'Authorization': 'testing',
+  'Authorization': token,
   'Content-Type': 'application/json'
 }
