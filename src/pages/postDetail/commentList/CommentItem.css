@@ -1,0 +1,15 @@
+.comment-list-item {
+	position: relative;
+	padding: 10px 10px 10px 60px;
+	margin-bottom: 3em;
+	background-color: #eceff1;
+	min-height: 90px;
+
+}
+.comment-list-item .vote {
+	position: absolute;
+}
+.comment-author {
+	display: flex;
+	justify-content: space-between;
+}
