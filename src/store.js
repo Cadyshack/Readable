@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 
 import categories from './modules/navigation';
 import posts from './modules/posts';
+import comments from './modules/comments';
 
 const rootReducer = combineReducers({
 	categories,
-	posts
+	posts,
+	comments
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
