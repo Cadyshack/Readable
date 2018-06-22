@@ -8,7 +8,7 @@ import ArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
 import './CommentItem.css';
 
 const CommentItem = (props) => {
-	const { voteScore, body, author, timestamp, id, voteComment } = props;
+	const { voteScore, body, author, timestamp, id, voteComment, openEditModal, deleteComment } = props;
 
 	const upVote = (e) => {
 		voteComment(id, 'upVote');
@@ -16,7 +16,12 @@ const CommentItem = (props) => {
 	const downVote = (e) => {
 		voteComment(id, 'downVote');
 	}
-
+	const editComment = (e) => {
+		openEditModal(body, id);
+	}
+	const commentDeletion = () => {
+		deleteComment(id);
+	}
 	return (
 		<div className="comment-list-item">
 			<div className="vote">
@@ -28,8 +33,10 @@ const CommentItem = (props) => {
 	    	<span>{author} says:</span><DateComponent timestamp={timestamp} />
     	</div>
     	<div className="comment-body"><p>{body}</p></div>
-
-
+    	<div className="buttons">
+	    	<button className='ripple' onClick={editComment} >Edit</button>
+	    	<button className='ripple' onClick={commentDeletion}>Delete</button>
+	  	</div>
 		</div>
 	);
 }
@@ -41,5 +48,7 @@ CommentItem.propTypes = {
 	body: PropTypes.string.isRequired,
 	timestamp: PropTypes.number.isRequired,
 	voteScore: PropTypes.number.isRequired,
-	voteComment: PropTypes.func.isRequired
+	voteComment: PropTypes.func.isRequired,
+	openEditModal: PropTypes.func.isRequired,
+	deleteComment: PropTypes.func.isRequired
 }

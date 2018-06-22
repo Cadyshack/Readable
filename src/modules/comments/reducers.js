@@ -5,7 +5,16 @@ import {
 	SORT_COMMENTS,
 	COMMENT_VOTE_REQUEST,
 	COMMENT_VOTE_FAILURE,
-	COMMENT_VOTE_SUCCESS
+	COMMENT_VOTE_SUCCESS,
+	ADD_COMMENT_REQUEST,
+	ADD_COMMENT_FAILURE,
+	ADD_COMMENT_SUCCESS,
+	EDIT_COMMENT_REQUEST,
+	EDIT_COMMENT_FAILURE,
+	EDIT_COMMENT_SUCCESS,
+	DELETE_COMMENT_REQUEST,
+	DELETE_COMMENT_FAILURE,
+	DELETE_COMMENT_SUCCESS
 } from './types.js';
 
 const commentsInitState = {
@@ -24,12 +33,18 @@ function comments (state = commentsInitState, action ) {
 
 	switch (action.type) {
 		case FETCH_COMMENTS_REQUEST:
+		case ADD_COMMENT_REQUEST:
+		case EDIT_COMMENT_REQUEST:
+		case DELETE_COMMENT_REQUEST:
 			return {
 				...state,
 				isLoading,
 				hasErrored: false,
 			}
 		case FETCH_COMMENTS_FAILURE:
+		case ADD_COMMENT_FAILURE:
+		case EDIT_COMMENT_FAILURE:
+		case DELETE_COMMENT_FAILURE:
 			return {
 				...state,
 				hasErrored,
@@ -83,7 +98,30 @@ function comments (state = commentsInitState, action ) {
 					isLoading: false
 				}
 			}
-
+		case ADD_COMMENT_SUCCESS:
+		case EDIT_COMMENT_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				hasErrored: false,
+				byId: {
+					...state.byId,
+					[comment.id]: {
+						...comment
+					}
+				}
+			}
+		case DELETE_COMMENT_SUCCESS:
+			let byIdCopy = Object.assign({}, state.byId);
+			delete byIdCopy[comment.id];
+			return {
+				...state,
+				hasErrored: false,
+				isLoading: false,
+				byId: {
+					...byIdCopy,
+				}
+			}
 		default:
 			return state
 	}

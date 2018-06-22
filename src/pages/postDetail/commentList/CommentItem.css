@@ -1,15 +1,27 @@
 .comment-list-item {
 	position: relative;
-	padding: 10px 10px 10px 60px;
-	margin-bottom: 3em;
+	padding: 10px 30px 10px 60px;
+	margin-bottom: 2em;
 	background-color: #eceff1;
 	min-height: 90px;
-
+	border-radius: 5px;
+	border-left: 1px solid #37474f;
+	border-right: 5px solid #37474f;
+	border-top: 1px solid #37474f;
+	border-bottom: 5px solid #37474f;
 }
 .comment-list-item .vote {
 	position: absolute;
+	width: 60px;
 }
 .comment-author {
 	display: flex;
 	justify-content: space-between;
+}
+.comment-list-item .buttons {
+	display: flex;
+	justify-content: flex-end;
+}
+.comment-list-item .buttons > button:first-child {
+	margin-right: 1em;
 }

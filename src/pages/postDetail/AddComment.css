@@ -1,0 +1,54 @@
+.add-comment {
+	margin: 0 auto 2em;
+
+}
+.add-comment > h2 {
+	margin: 0.5em 0 0;
+}
+.add-comment .author {
+	width: 300px;
+	max-width: 100%;
+}
+/*.add-comment form.open .bottom-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}*/
+.bottom-row .author.error + span.errmsg {
+	display: block;
+}
+.add-comment form.close textarea {
+	height: 50px;
+	transition: 0.5s;
+}
+.add-comment form.open textarea {
+	height: 200px;
+	transition: 0.5s;
+}
+.add-comment form.close .bottom-row {
+	/*display: none;*/
+	height: 0px;
+	opacity: 0;
+	transition: opacity,height 0.5s;
+	display: none;
+}
+.add-comment form.open .bottom-row {
+	opacity: 1;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: opacity,height 0.5s;
+}
+
+@media only screen and (max-width: 740px){
+	.add-comment .bottom-row {
+		display: block;
+	}
+	.bottom-row .form-buttons {
+		display: block;
+	}
+	.add-comment .author {
+		margin-top: 1em;
+	}
+}
