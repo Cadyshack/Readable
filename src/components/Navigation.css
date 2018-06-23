@@ -167,7 +167,11 @@ nav ul, .mobile-nav ul {
 }
 
 
-
+/* Loader */
+.app-header .loader {
+	margin: 0 auto;
+	text-align: center;
+}
 
 
 

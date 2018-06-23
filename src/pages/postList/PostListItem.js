@@ -57,7 +57,7 @@ const PostListItem = (props) => {
 	    	</div>
 	    	<div className="edit-delete">
 	    		<div>
-	    			<span><Comment size={30} className="comment" />{` ${commentCount} coments`}</span>
+	    			<span><Comment size={30} className="comment" />{` ${commentCount} comments`}</span>
 	    		</div>
 	    		<div className="buttons">
 			    	<button className='ripple' onClick={editPostButton}>Edit</button>

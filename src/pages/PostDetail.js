@@ -70,12 +70,12 @@ class PostDetail extends Component {
 		const { post, isLoading, hasErrored,id } = this.props;
 
 
-		if (hasErrored || post == null){
+		if (hasErrored){
   		return (
   			<ErrorPage />
 			)
   	}
-  	if ( isLoading ) {
+  	if ( isLoading || post === null ) {
   		return (
   			<div className="isLoading">
 	  			<Loading type="spin" className="loader" color='#263238'  />
