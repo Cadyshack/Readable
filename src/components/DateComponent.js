@@ -6,11 +6,9 @@ const DateComponent = (props) => {
 	if (!options) {
 		options = { year:'numeric', month:'long', day:'numeric' };
 	}
-	let date = new Date(timestamp);
-	let formattedDate = date.toLocaleDateString("en-CA", options);
-
+	const date = new Date(timestamp).toLocaleDateString("en-CA", options);
 	return (
-		<span className="date-info">{formattedDate}</span>
+		<span className="date-info">{date}</span>
 	)
 }
 

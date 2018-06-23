@@ -147,7 +147,7 @@ function posts (state = postInitState, action) {
 				}
 			}
 
-		case DELETE_POST_SUCCESS:
+		case DELETE_POST_SUCCESS: {
 			let byIdCopy = Object.assign({}, state.byId);
 			delete byIdCopy[post.id];
 			return {
@@ -158,6 +158,7 @@ function posts (state = postInitState, action) {
 					...byIdCopy,
 				}
 			}
+		}
 		case DELETE_COMMENT_SUCCESS:
 
 			return {
