@@ -12,9 +12,7 @@ class Navigation extends Component {
 	state = {
 		mobileNavOpen: false
 	}
-	componentDidMount() {
-    this.props.fetchCat();
-  }
+
   openNav = () => {
   	this.setState({ mobileNavOpen: true });
   }
@@ -93,11 +91,5 @@ function mapStateToProps ({ categories }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    fetchCat: (data) => dispatch(navigationOperations.fetchCategories(data))
-  }
-}
 
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation))
+export default withRouter(connect(mapStateToProps)(Navigation))
