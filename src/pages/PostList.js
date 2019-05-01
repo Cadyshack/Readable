@@ -86,8 +86,6 @@ class PostList extends Component {
   		)
   	}
 
-
-
 		return (
 			<div className="container">
 				<div className="sort-container">
@@ -123,7 +121,6 @@ class PostList extends Component {
 								vote={vote}
 								deletePost={this.props.deletePost}
 								editPostModalOpen={this.openEditPostModal}
-
 							/>
 					))}
 				</section>

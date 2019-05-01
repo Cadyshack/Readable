@@ -183,8 +183,6 @@ function posts (state = postInitState, action) {
 					}
 				}
 			}
-
-
 		default :
 			return state
 	}
